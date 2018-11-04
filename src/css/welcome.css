@@ -1,0 +1,42 @@
+.welcome-component-container .title-container {
+  margin-top: 0px;
+}
+
+.circle-container svg {
+  width: 275px;
+}
+
+.circle-text {
+  font-size: 20px;
+  font-weight: 800;
+  position: absolute;
+  color: #FFF;
+}
+
+.circle-container {
+  cursor: pointer;
+}
+
+.circle-container circle:nth-child(1){
+  opacity: 0.07;
+}
+
+.circle-container:hover circle:nth-child(2){
+  transform: scale(1.15);
+  transition: 0.2s cubic-bezier(.2,.84,.2,.91);
+  /* transition: 0.2s ease-in-out; */
+}
+
+.circle-container:hover circle:nth-child(1){
+  transform: scale(0.85);
+  transition: 0.2s cubic-bezier(.2,.84,.2,.91);
+  /* transition: 0.2s ease-in-out; */
+}
+
+circle {
+  position: relative;
+  transform-origin: center center;
+  transform: scale(1);
+  transition: 0.2s cubic-bezier(0,.84,.23,.75);
+  /* transition: 0.2s ease-in-out; */
+}

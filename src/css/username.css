@@ -1,0 +1,22 @@
+.username-input {
+  padding: 6px 50px 6px 50px;
+  text-align: center;
+  border: none;
+  border-bottom: 9px solid #DDDDDD;
+  font-size: 48px;
+  font-family: 'Montserrat';
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #2D3E4F;
+  transition: 0.2s ease-in-out;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 12px solid #458CC8;
+  transition: 0.2s ease-in-out;
+}
+
+.input-container {
+  height: 100px;
+}

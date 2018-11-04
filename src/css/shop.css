@@ -1,0 +1,176 @@
+.shop-circle {
+  transition: 0.4s ease-in-out;
+  width: 250px;
+  height: 250px;
+  background-color: #458CC8;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.shop-circle:hover {
+  transition: 0.4s ease-in-out;
+  border-radius: 3px;
+  width: 400px;
+}
+
+.bag-img {
+  transition: 0.3s ease-in-out;
+  width: 70px;
+  margin: 20px;
+}
+
+.shop-circle div {
+  display: inline-block;
+}
+
+#shop-circle-text {
+  transition: 0.3s ease-in-out;
+  font-size: 24px;
+  width: 0px;
+  overflow: hidden;
+  color: #FFF;
+  font-weight: 900;
+}
+
+.shop-circle:hover #shop-circle-text {
+  display: inline-block;
+  transition: 0.2s ease-in-out;
+  transition-delay: 0.4s;
+  width: 80px;
+}
+
+.shop-circle:hover .bag-img{
+  transition: 0.6s ease-in-out;
+  width: 40px;
+}
+
+.shop-menu-container {
+  width: 100%;
+}
+
+.shop-menu-container {
+  display: flex;
+}
+
+.products-sidebar {
+  text-align: center;
+  width: 420px;
+  margin-right: 50px;
+  color: #2D3E4F;
+  border-right: 3px solid #eeeeee;
+}
+
+.products-sidebar-text {
+  position: fixed;
+  margin: 54px;
+}
+
+.products-sidebar-title {
+  font-weight: 800;
+  font-size: 32px;
+}
+
+.products-container {
+  width: 100%;
+}
+
+.product {
+  display: inline-block;
+  width: 180px;
+  border: 1px solid #2D3E4F;
+  margin: 15px;
+  cursor: pointer;
+}
+
+.product-img {
+  background-color: #FFF;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 180px;
+  padding: 20px;
+  width: 140px;
+  height: 140px;
+  color: #458CC8;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.product:hover .product-img {
+  opacity: 0.9;
+}
+
+.product-info {
+  text-align: center;
+  padding: 20px;
+  overflow: hidden;
+  font-size: 12px;
+  background-color: #2D3E4F;
+  color: #FFF;
+}
+
+.right-shop-container, .right-shop-container > div {
+  width: 360px;
+}
+
+.right-shop-container > div {
+  position: fixed;
+  top: 160px;
+}
+
+.exit-shop {
+  text-align: left;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.exit-shop:hover svg {
+  transform: rotate(90deg);
+  stroke-width: 10px;
+  transition: 0.3s ease-in-out;
+}
+
+.exit-svg {
+  transition: 0.2s ease-in-out;
+  width: 45px;
+  stroke-width: 6px;
+}
+
+.exit-text {
+  font-size: 12px;
+}
+
+#copy-textarea {
+  width: 0px;
+  height: 0px;
+}
+
+button {
+  background-color: transparent;
+  border: 1px solid #458CC8;
+  color: #458CC8;
+  padding: 15px;
+  cursor: pointer;
+  width: 150px;
+  display: block;
+  margin-top: 30px;
+}
+
+button:hover {
+  background-color: #458CC8;
+  color: #FFF;
+}
+
+
+
+@media only screen and (max-width: 1380px) {
+  .right-shop-container, .right-shop-container > div {
+    width: 420px;
+  }
+  
+  .products-sidebar {
+    width: 540px;
+  }
+}

@@ -1,0 +1,150 @@
+/* ANIMATION */
+/* --------- */
+
+@keyframes circleAnimation1 {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(6);
+  }
+  99% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(6);
+    opacity: 0;;
+  }
+}
+
+@keyframes circleAnimation2 {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(6);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(6);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(6);
+    opacity: 0;
+  }
+}
+
+@keyframes logoAnimation {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  55% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes dainty {
+  0% {
+    transform: scaleX(1);
+  }
+  25% {
+    transform: scaleX(0.7);
+  }
+  50% {
+    transform: scaleX(1.1);
+  }
+  75% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.invisible {
+  display: none !important;
+}
+
+.animation-circle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(0)
+}
+
+.animation1-circle {
+  z-index: 100;
+  animation: 3.5s circleAnimation1;
+}
+
+.animation2-circle {
+  z-index: 102;
+  animation: 1s circleAnimation2;
+}
+
+.animation-svg {
+  width: 400px;
+  height: 400px;
+}
+
+.animation-logo-container {
+  z-index: 101;
+  animation: 3s logoAnimation ease-in-out;
+}
+
+.animation-logo-container img {
+  width: 400px;
+}
+
+.nav-logo:hover {
+  animation: 0.4s dainty ease-in-out;
+}
+
+.menu-item {
+  margin-right: 0px;
+  transition: 0.2s ease-in-out;
+}
+
+.nav-menu:hover .menu-item:nth-child(1) {
+  margin-right: 20px;
+  border-bottom: 3px solid #2D3E4F;
+  transition: 0.4s ease-in-out;
+}
+
+.nav-menu:hover .ham-svg path:nth-child(1) {
+  transform: translate(-7px, 60px);
+}
+
+.nav-menu:hover .ham-svg path:nth-child(2) {
+  animation: 0.4s hamimation ease-in-out forwards;
+}
+
+.ham-svg path {
+  transform: translate(0px, 0px);
+  transition: 0.4s ease-in-out;
+}
+
+@keyframes hamimation {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(7px, -60px);
+  }
+}

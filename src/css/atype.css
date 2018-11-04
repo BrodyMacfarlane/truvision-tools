@@ -1,0 +1,29 @@
+.sub-title.atype-title{
+  font-size: 75px;
+}
+
+.associatetype {
+  font-size: 20px;
+  width: 240px;
+  height: 330px;
+  cursor: pointer;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  margin: 6px;
+  padding: 10px 20px 10px 20px;
+  display: inline-block;
+  background-color: #FFF;
+  color: #2D3E4F;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.associatetype:hover, .associatetype-selected {
+  background-color: #458CC8;
+  color: #FFFFFF;
+}
+
+.associatetype div {
+  text-align: center;
+}
