@@ -26,7 +26,7 @@ app.get('/api/getCountries', (req, res) => {
 
 app.post('/api/getProducts', (req, res) => {
   const db = app.get('db')
-  db.get_products([req.body.store, req.body.region, req.body.atype]).then(response => {
+  db.get_products([req.body.region, req.body.atype]).then(response => {
     res.send(response)
   })
 })
