@@ -4,7 +4,6 @@ import Welcome from './Components/Signup/Welcome';
 import Animation from './Components/Signup/Animation';
 import Country from './Components/Signup/Country';
 import Atype from './Components/Signup/Atype';
-import Autoship from './Components/Signup/Autoship';
 import Shop from './Components/Signup/Shop';
 import axios from 'axios';
 import logo from "./assets/logo.svg";
@@ -16,7 +15,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      page: 5,
+      page: 4,
       isAnimating: false,
       isAnimating2: false,
       showContent: true,
@@ -24,7 +23,6 @@ class App extends Component {
       countrycode: "US",
       countryname: "United States of America",
       atype: 1,
-      autoship: false,
       shopopen: false,
       cart: []
     }
@@ -81,12 +79,20 @@ class App extends Component {
     })
   }
 
-  addToCart(cartItem){
-    if(this.state.cart.indexOf(cartItem) > -1 || this.state.cart.length > 2){
+  addToCart(cartItem, type){
+    let refCartItem = {
+      "itemcode": cartItem.itemid,
+      "qty": 1,
+      "type": type
+    }
+    let cartPos = this.state.cart.map((x) => {
+      return x.itemcode
+    }).indexOf(refCartItem["itemcode"])
+    if(cartPos > -1 || this.state.cart.length > 2){
       console.log('Individual item quantity limited to 1 and cart length limited to 3 items.')
     }
     else {
-      let cartArr = this.state.cart.concat(cartItem)
+      let cartArr = this.state.cart.concat(refCartItem)
       this.setState({cart: cartArr})
     }
   }
@@ -137,11 +143,10 @@ class App extends Component {
             {this.state.page === 1 ? <Username incrementPage={this.incrementPage.bind(this)} username={this.state.username} updateUsername={this.updateUsername.bind(this)}/> : null}
             {this.state.page === 2 ? <Country countryCode={this.state.countrycode} countryName={this.state.countryname} updateCountry={this.updateCountry.bind(this)}/> : null}
             {this.state.page === 3 ? <Atype aType={this.state.atype} updateAType={this.updateAType.bind(this)}/> : null}
-            {this.state.page === 4 ? <Autoship aType={this.state.atype} autoship={this.state.autoship} updateAutoship={this.updateAutoship.bind(this)}/> : null}
-            {this.state.page === 5 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} autoship={this.state.autoship} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} addToCart={this.addToCart.bind(this)} cart={this.state.cart}/> : null}
+            {this.state.page === 4 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} addToCart={this.addToCart.bind(this)} cart={this.state.cart}/> : null}
           </div>
-          {this.state.page > 0 && !this.state.shopopen && this.state.page < 5 ? <div onClick={this.incrementPage} className="step"><div>NEXT STEP</div></div> : null}
-          {!this.state.shopopen && this.state.page >= 5 ? <div id="no-step" className="step"><div></div></div> : null}
+          {this.state.page > 0 && !this.state.shopopen && this.state.page < 4 ? <div onClick={this.incrementPage} className="step"><div>NEXT STEP</div></div> : null}
+          {!this.state.shopopen && this.state.page >= 4 ? <div id="no-step" className="step"><div></div></div> : null}
         </div>
         {this.state.isAnimating || this.state.isAnimating2 ? <Animation isAnimating={this.state.isAnimating} isAnimating2={this.state.isAnimating2} showContent={this.state.showContent}/> : null}
       </div>

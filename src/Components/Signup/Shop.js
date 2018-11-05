@@ -20,7 +20,7 @@ export default class Autoship extends Component {
         <div className="shop-component-container component-container">
           {!this.props.shopopen ? <ShopContent openShop={this.props.openShop}/> : null}
         </div>
-        {this.props.shopopen ? <Menu username={this.props.username} autoship={this.props.autoship} countryCode={this.props.countryCode} aType={this.props.aType} closeShop={this.props.closeShop} addToCart={(cartItem) => {this.props.addToCart(cartItem)}} cart={this.props.cart}/> : null}
+        {this.props.shopopen ? <Menu username={this.props.username} autoship={this.props.autoship} countryCode={this.props.countryCode} aType={this.props.aType} closeShop={this.props.closeShop} addToCart={(cartItem, type) => {this.props.addToCart(cartItem, type)}} cart={this.props.cart}/> : null}
       </div>
     )
   }

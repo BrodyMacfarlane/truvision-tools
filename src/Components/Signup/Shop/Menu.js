@@ -19,28 +19,6 @@ const regionids = {
   "GT":	31,
 }
 
-const storeID = {
-  false: 4,
-  true: 5
-}
-
-const autoshipDictionary = {
-  true: "autoship",
-  false: "kit"
-}
-
-function reformCart(cart, autobool){
-  let reformedCart = []
-  for(let i = 0; i < cart.length; i++){
-    reformedCart.push({
-      "itemcode": cart[i].itemid,
-      "qty": 1,
-      "type": autoshipDictionary[autobool]
-    })
-  }
-  return reformedCart
-}
-
 export default class Autoship extends Component {
   constructor(props){
     super(props)
@@ -48,24 +26,28 @@ export default class Autoship extends Component {
       products: [],
       category: 0,
       shortenedLink: "",
-      copying: false
+      copying: false,
+      productsDictionary: null
     }
     this.shortenLink = this.shortenLink.bind(this)
     this.copyToClipboard = this.copyToClipboard.bind(this)
   }
 
   componentDidMount(){
-    axios.post('/api/getProducts', {store: storeID[this.props.autoship], region: regionids[this.props.countryCode], atype: this.props.aType})
+    axios.post('/api/getProducts', {region: regionids[this.props.countryCode], atype: this.props.aType})
       .then(response => {
         this.setState({products: response.data}, () => {
-          console.log(this.state.products[0].productname)
+          let productsDictionaryPregame = {}
+          for(let i = 0; i < this.state.products.length; i++){
+            productsDictionaryPregame[this.state.products[i].itemid] = this.state.products[i]
+          }
+          this.setState({productsDictionary: productsDictionaryPregame})
         })
       })
   }
 
   shortenLink(){
-    let reformedCart = reformCart(this.props.cart, this.props.autoship)
-    axios.post('/api/getShortLink', {username: this.props.username, aType: this.props.aType, countryCode: this.props.countryCode, cart: reformedCart})
+    axios.post('/api/getShortLink', {username: this.props.username, aType: this.props.aType, countryCode: this.props.countryCode, cart: this.props.cart})
       .then(response => {
         let resp = response.data.data
         this.setState({shortenedLink: resp.url})
@@ -88,21 +70,25 @@ export default class Autoship extends Component {
             <div className="products-sidebar-title">
               Categories
             </div>
+            <div className="categories">
+              Coming soon!
+            </div>
           </div>
         </div>
         <div className="products-container">
           {this.state.products.map((product, i) => {
             return (
-              <div key={i} className="product" onClick={() => {this.props.addToCart(product)}}>
+              <div key={i} className="product">
                 {/* <div className="product-img">SKU#{product.sku}</div> */}
                 <img src={`https://truvision.corpadmin.directscale.com/CMS/Images/Inventory/${product.image}`} alt={`SKU#${product.sku}`} className="product-img"/>
                 <div className="product-info">
                   <div className="product-name">
-                    {product.productname} 
+                    {product.productname}
                   </div>
-                  <div className="product-price">
-                    {product.price} {product.currency}
-                  </div>
+                </div>
+                <div className="choose-store">
+                  {product.stores.indexOf(4) > -1 ? <div className="add-product-type" onClick={() => {this.props.addToCart(product, "kit")}}>KIT</div> : null}
+                  {product.stores.indexOf(5) > -1 ? <div className="add-product-type" onClick={() => {this.props.addToCart(product, "autoship")}}>AUTOSHIP</div> : null}
                 </div>
               </div>
             )
@@ -122,13 +108,25 @@ export default class Autoship extends Component {
             </div>
             <div className="cart-container">
               {
-                this.props.cart.map((cartItem, i) => {
-                  return (
-                    <div key={i} className="cart-item">
-                      {cartItem.productname}
-                    </div>
-                  )
-                })
+                this.state.productsDictionary
+                ?
+                  this.props.cart.map((cartItem, i) => {
+                    return (
+                      <div key={i} className="cart-item-container">
+                        <img className="cart-image" src={`https://truvision.corpadmin.directscale.com/CMS/Images/Inventory/${this.state.productsDictionary[cartItem.itemcode].image}`} alt=""/>
+                        <div className="cart-item">
+                          <div className="cart-item-name">
+                            {this.state.productsDictionary[cartItem.itemcode].productname}
+                          </div>
+                          <div className="cart-item-type">
+                            {cartItem.type}
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })
+                :
+                null
               }
             </div>
             {
