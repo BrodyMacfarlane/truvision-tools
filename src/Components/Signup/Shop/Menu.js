@@ -25,15 +25,13 @@ export default class Autoship extends Component {
     this.state = {
       products: [],
       category: 0,
-      shortenedLink: "",
       copying: false,
       productsDictionary: null
     }
-    this.shortenLink = this.shortenLink.bind(this)
-    this.copyToClipboard = this.copyToClipboard.bind(this)
   }
 
   componentDidMount(){
+    // this.props.getProducts()
     axios.post('/api/getProducts', {region: regionids[this.props.countryCode], atype: this.props.aType})
       .then(response => {
         this.setState({products: response.data}, () => {
@@ -46,27 +44,12 @@ export default class Autoship extends Component {
       })
   }
 
-  shortenLink(){
-    axios.post('/api/getShortLink', {username: this.props.username, aType: this.props.aType, countryCode: this.props.countryCode, cart: this.props.cart})
-      .then(response => {
-        let resp = response.data.data
-        this.setState({shortenedLink: resp.url})
-      })
-  }
-
-  copyToClipboard = (e) => {
-    this.setState({copying: true}, () => {
-      this.textArea.select();
-      document.execCommand('copy');
-      this.setState({copying: false})
-    })
-  }
-
   render(){
     return (
       <div className="shop-menu-container">
         <div className="products-sidebar">
           <div className="products-sidebar-text">
+          <div className="shop-step cart-prev-step" onClick={this.props.closeShop}>Back</div>
             <div className="products-sidebar-title">
               Categories
             </div>
@@ -96,15 +79,9 @@ export default class Autoship extends Component {
         </div>
         <div className="right-shop-container">
           <div>
-            <div className="exit-shop-container">
-              <div className="exit-shop" onClick={this.props.closeShop}>
-                <svg className="exit-svg" viewBox="0 0 45 45">
-                  <path fill="none" stroke="#FF0000" d={`M 5 5, L 40 40`}/>
-                  <path fill="none" stroke="#FF0000" d={`M 40 5, L 5 40`}/>
-                </svg>
-                {/* <img src={exit} alt="" className="exit-svg" onClick={this.props.closeShop}/> */}
-                {/* <div className="exit-text">Exit Shop</div> */}
-              </div>
+            <div className="shop-step cart-next-step" onClick={this.props.incrementPage}>Finalize</div>
+            <div className="cart-title">
+              Cart
             </div>
             <div className="cart-container">
               {
@@ -113,6 +90,12 @@ export default class Autoship extends Component {
                   this.props.cart.map((cartItem, i) => {
                     return (
                       <div key={i} className="cart-item-container">
+                        <div className="cart-item-remove" onClick={() => this.props.removeFromCart(i)}>
+                          <svg className="remove-svg" viewBox="0 0 45 45">
+                            <path fill="none" stroke="#ff4646" d={`M 5 5, L 40 40`}/>
+                            <path fill="none" stroke="#ff4646" d={`M 40 5, L 5 40`}/>
+                          </svg>
+                        </div>
                         <img className="cart-image" src={`https://truvision.corpadmin.directscale.com/CMS/Images/Inventory/${this.state.productsDictionary[cartItem.itemcode].image}`} alt=""/>
                         <div className="cart-item">
                           <div className="cart-item-name">
@@ -132,9 +115,6 @@ export default class Autoship extends Component {
             {
               this.props.cart.length > 0 ?
                 <div>
-                  <button className="generate-link" onClick={this.shortenLink}>
-                    Generate URL
-                  </button>
                   {this.state.shortenedLink ? <button onClick={this.copyToClipboard}>{this.state.shortenedLink}</button> : null}
                 </div>
               : <div className="cart-text">Nothing in your cart.</div>

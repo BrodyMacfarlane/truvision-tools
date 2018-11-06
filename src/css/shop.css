@@ -58,7 +58,6 @@
 .products-sidebar {
   text-align: left;
   width: 420px;
-  color: #2D3E4F;
   border-right: 3px solid #eeeeee;
 }
 
@@ -66,7 +65,8 @@
   margin: 54px;
 }
 
-.products-sidebar-title {
+.products-sidebar-title, .cart-title {
+  color: #2D3E4F;
   font-weight: 800;
   font-size: 32px;
   margin-bottom: 30px;
@@ -109,67 +109,17 @@
 }
 
 .right-shop-container {
-  margin-top: 74px;
-  margin-right: 54px;
+  padding: 54px 54px 0px 30px;
   width: 360px;
-  height: calc(100vh - 197px);
+  height: calc(100vh - 177px);
   text-align: right;
   overflow: scroll;
-}
-
-.exit-shop {
-  text-align: right;
-  cursor: pointer;
-  padding: 10px;
-}
-
-.exit-shop:hover svg {
-  transform: rotate(90deg);
-  stroke-width: 10px;
-  transition: 0.3s ease-in-out;
-}
-
-.exit-svg {
-  position: absolute;
-  top: 153px;
-  right: 54px;
-  transition: 0.2s ease-in-out;
-  width: 24px;
-  stroke-width: 6px;
-  border: 4px solid #ff0000;
-  border-radius: 50%;
-  padding: 10px;
-  background-color: #FFF;
-}
-
-.exit-text {
-  font-size: 12px;
+  border-left: 3px solid #eee;
 }
 
 #copy-textarea {
   width: 0px;
   height: 0px;
-}
-
-button {
-  background-color: transparent;
-  border: 1px solid #458CC8;
-  color: #458CC8;
-  padding: 18px;
-  cursor: pointer;
-  width: 100%;
-  display: block;
-  margin-bottom: 15px;
-  font-size: 14px;
-}
-
-button:hover {
-  background-color: #458CC8;
-  color: #FFF;
-}
-
-.generate-link {
-  margin-top: 15px;
 }
 
 .choose-store {
@@ -196,6 +146,8 @@ button:hover {
   border: 1px solid #ccc;
   text-align: center;
   margin-bottom: 15px;
+  position: relative;
+  z-index: 0;
 }
 
 /* .cart-item-container:hover {
@@ -203,19 +155,72 @@ button:hover {
 } */
 
 .cart-image {
-  padding: 15px;
-  width: 45px;
+  padding: 10px;
+  width: 55px;
 }
 
 .cart-item-name {
   border-top: 1px solid #ccc;
   font-size: 14px;
-  padding-top: 15px
+  padding-top: 9px;
 }
 
 .cart-item-type {
   color: #2D3E4F;
   opacity: 0.7;
   font-size: 12px;
-  padding-bottom: 15px;
+  padding-bottom: 9px;
+  text-transform: capitalize;
+}
+
+.shop-step {
+  font-size: 12px;
+  position: absolute;
+  z-index: 5;
+  top: 50%;
+  background-color: #458CC8;
+  color: #FFF;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  line-height: 100px;
+  transition: 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.shop-step:hover {
+  transform: scale(1.2);
+  transition: 0.2s ease-in-out;
+}
+
+.cart-prev-step {
+  left: 15px;
+}
+
+.cart-next-step {
+  right: 15px;
+}
+
+.cart-item-remove {
+  cursor: pointer;
+}
+
+.cart-item-remove:hover svg {
+  transform: rotate(90deg);
+  stroke-width: 5px;
+  transition: 0.3s ease-in-out;
+}
+
+.remove-svg {
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  transition: 0.2s ease-in-out;
+  width: 20px;
+  stroke-width: 4px;
+  border: 2px solid #ff4646;
+  border-radius: 50%;
+  padding: 3px;
+  background-color: #FFF;
 }

@@ -5,6 +5,7 @@ import Animation from './Components/Signup/Animation';
 import Country from './Components/Signup/Country';
 import Atype from './Components/Signup/Atype';
 import Shop from './Components/Signup/Shop';
+import Final from './Components/Signup/Final';
 import axios from 'axios';
 import logo from "./assets/logo.svg";
 import './css/main.css';
@@ -15,7 +16,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      page: 4,
+      page: 0,
       isAnimating: false,
       isAnimating2: false,
       showContent: true,
@@ -36,6 +37,7 @@ class App extends Component {
   }
 
   incrementPage(){
+    this.setState({shopopen: false})
     if(this.state.page <= 0){
       this.startAnimation()
     }
@@ -97,6 +99,12 @@ class App extends Component {
     }
   }
 
+  removeFromCart(i){
+    let cartArr = this.state.cart
+    cartArr.splice(i, 1)
+    this.setState({cart: cartArr})
+  }
+
   startAnimation(){
     this.setState({isAnimating: true, showContent: false})
     setTimeout(() => {
@@ -143,7 +151,8 @@ class App extends Component {
             {this.state.page === 1 ? <Username incrementPage={this.incrementPage.bind(this)} username={this.state.username} updateUsername={this.updateUsername.bind(this)}/> : null}
             {this.state.page === 2 ? <Country countryCode={this.state.countrycode} countryName={this.state.countryname} updateCountry={this.updateCountry.bind(this)}/> : null}
             {this.state.page === 3 ? <Atype aType={this.state.atype} updateAType={this.updateAType.bind(this)}/> : null}
-            {this.state.page === 4 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} addToCart={this.addToCart.bind(this)} cart={this.state.cart}/> : null}
+            {this.state.page === 4 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} incrementPage={this.incrementPage.bind(this)} addToCart={this.addToCart.bind(this)} removeFromCart={this.removeFromCart.bind(this)} cart={this.state.cart}/> : null}
+            {this.state.page === 5 ? <Final username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
           </div>
           {this.state.page > 0 && !this.state.shopopen && this.state.page < 4 ? <div onClick={this.incrementPage} className="step"><div>NEXT STEP</div></div> : null}
           {!this.state.shopopen && this.state.page >= 4 ? <div id="no-step" className="step"><div></div></div> : null}
