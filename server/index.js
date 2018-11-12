@@ -9,6 +9,8 @@ const express = require('express')
 
 const app = express()
 
+app.use( express.static( `${__dirname}/../build` ) );
+
 app.use(bodyParser.json())
 app.use(cors())
 
@@ -37,6 +39,11 @@ app.post('/api/getShortLink', (req, res) => {
     .then(response => {
       res.send(response.data)
     })
+})
+
+const path = require('path')
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
 })
 
 const PORT = 3535
