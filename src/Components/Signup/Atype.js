@@ -24,7 +24,7 @@ export default class Atype extends Component {
             Please select the type of account that will be enrolled.
           </div>
         </div>
-        <div className="associatetype-container content-container">
+        <div id="associatetype-container" className="associatetype-container content-container">
           <div className={this.props.aType === 1 ? "associatetype associatetype-selected" : "associatetype"} onClick={(type) => this.props.updateAType(1)}>
             <div>Associate</div>
           </div>

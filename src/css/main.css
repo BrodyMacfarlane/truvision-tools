@@ -30,15 +30,15 @@ a {
   position: fixed;
   margin-bottom: 60px;
   width: 100%;
-  height: 63px;
-  background-color: transparent;
+  height: auto; /* 63px */
+  background-color: #FFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .nav-item {
-  padding: 60px 60px 0px 60px;
+  padding: 30px 60px 20px 60px;
   cursor: pointer;
 }
 
@@ -64,15 +64,25 @@ a {
 }
 
 .step {
+  position: fixed;
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 240px;
   height: calc(100vh - 123px);
   font-weight: 800;
   font-size: 24px;
   cursor: pointer;
   color: #2D3E4F;
+}
+
+#prev-step {
+  left: 0px;
+}
+
+#next-step {
+  right: 0px;
 }
 
 .signup-container, .step {
@@ -83,14 +93,6 @@ a {
   background-color: #2D3E4F;
   color: #FFF;
   font-size: 26px;
-}
-
-#no-step {
-  cursor: default;
-}
-
-#no-step:hover {
-  background-color: #FFF;
 }
 
 /* .signup-container {
@@ -130,4 +132,72 @@ a {
   font-size: 18px;
   font-weight: 500;
   line-height: 30px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .step {
+    width: 200px;
+  }
+}
+
+
+@media only screen and (max-width: 1150px) {
+  .component-container {
+    width: 600px;
+  }
+
+  .content-container {
+    margin: 0px 0px 40px 0px;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .component-container {
+    width: 480px;
+  }
+
+  .title {
+    font-size: 80px;
+  }
+
+  .sub-title {
+    font-size: 64px;
+  }
+
+  .step {
+    width: 120px;
+    font-size: 16px;
+  }
+
+  .step:hover {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .step {
+    width: 60px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .component-container {
+    width: 240px;
+  }
+
+  .nav-item {
+      padding: 30px 15px 20px 15px;
+  }
+
+  .title {
+    font-size: 48px;
+  }
+
+  .sub-title {
+    font-size: 36px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
 }

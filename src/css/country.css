@@ -8,7 +8,7 @@
   display: inline-block;
   background-color: #FFF;
   border-radius: 3px;
-  margin: 10px;
+  margin: 9px;
   padding: 10px 20px 10px 20px;
   font-size: 14px;
   cursor: pointer;
@@ -35,4 +35,12 @@
 .description.country-name {
   font-size: 24px;
   font-weight: 800;
+}
+
+@media only screen and (max-width: 600px) {
+  .country {
+    width: 48px;
+    margin: 6px;
+    font-size: 12px;
+  }
 }

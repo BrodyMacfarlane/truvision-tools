@@ -27,3 +27,32 @@
 .associatetype div {
   text-align: center;
 }
+
+@media only screen and (max-width: 1150px) {
+  .sub-title.atype-title {
+    font-size: 54px;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .sub-title.atype-title {
+    font-size: 48px;
+  }
+
+  .associatetype {
+    height: 120px;
+    width: 90%;
+    display: block;
+    line-height: 120px;
+  }
+
+  #associatetype-container {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sub-title {
+    font-size: 28px;
+  }
+}

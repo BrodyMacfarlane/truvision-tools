@@ -116,35 +116,7 @@
   animation: 0.4s dainty ease-in-out;
 }
 
-.menu-item {
-  margin-right: 0px;
-  transition: 0.2s ease-in-out;
-}
-
 .nav-menu:hover .menu-item:nth-child(1) {
-  margin-right: 20px;
   border-bottom: 3px solid #2D3E4F;
-  transition: 0.4s ease-in-out;
-}
-
-.nav-menu:hover .ham-svg path:nth-child(1) {
-  transform: translate(-7px, 60px);
-}
-
-.nav-menu:hover .ham-svg path:nth-child(2) {
-  animation: 0.4s hamimation ease-in-out forwards;
-}
-
-.ham-svg path {
-  transform: translate(0px, 0px);
-  transition: 0.4s ease-in-out;
-}
-
-@keyframes hamimation {
-  0% {
-    transform: translate(0px, 0px);
-  }
-  100% {
-    transform: translate(7px, -60px);
-  }
+  transition: 0.2s ease-in-out;
 }

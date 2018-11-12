@@ -1,5 +1,6 @@
 .username-input {
-  padding: 6px 50px 6px 50px;
+  width: calc(100% - 18px);
+  padding: 6px 9px 6px 9px;
   text-align: center;
   border: none;
   border-bottom: 9px solid #DDDDDD;
@@ -19,4 +20,22 @@ input:focus {
 
 .input-container {
   height: 100px;
+}
+
+@media only screen and (max-width: 1150px) {
+  .username-input {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .username-input {
+    font-size: 34px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .username-input {
+    font-size: 20px;
+  }
 }

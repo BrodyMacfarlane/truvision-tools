@@ -138,14 +138,10 @@ class App extends Component {
           </div>
           <div className="nav-item nav-menu">
             <div className="menu-item">MENU</div>
-            <svg className="menu-item ham-svg" viewBox="0 0 60 60">
-              <path fill="none" stroke="#458CC8" strokeWidth="4" d={`M 6 57, L 12 3`}/>
-              <path fill="none" stroke="#458CC8" strokeWidth="4" d={`M 12 57, L 18 3`}/>
-            </svg>
           </div>
         </div>
         <div className="step-container">
-          {this.state.page > 0 && !this.state.shopopen ? <div onClick={this.decrementPage} className="step"><div>PREV STEP</div></div> : null}
+          {this.state.page > 0 && !this.state.shopopen ? <div id="prev-step" onClick={this.decrementPage} className="step"><div>PREV STEP</div></div> : null}
           <div className="signup-container">
             {this.state.page <= 0 ? <Welcome incrementPage={this.incrementPage.bind(this)}/> : null}
             {this.state.page === 1 ? <Username incrementPage={this.incrementPage.bind(this)} username={this.state.username} updateUsername={this.updateUsername.bind(this)}/> : null}
@@ -154,8 +150,7 @@ class App extends Component {
             {this.state.page === 4 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} incrementPage={this.incrementPage.bind(this)} addToCart={this.addToCart.bind(this)} removeFromCart={this.removeFromCart.bind(this)} cart={this.state.cart}/> : null}
             {this.state.page === 5 ? <Final username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
           </div>
-          {this.state.page > 0 && !this.state.shopopen && this.state.page < 4 ? <div onClick={this.incrementPage} className="step"><div>NEXT STEP</div></div> : null}
-          {!this.state.shopopen && this.state.page >= 4 ? <div id="no-step" className="step"><div></div></div> : null}
+          {this.state.page > 0 && !this.state.shopopen && this.state.page < 4 ? <div id="next-step" onClick={this.incrementPage} className="step"><div>NEXT STEP</div></div> : null}
         </div>
         {this.state.isAnimating || this.state.isAnimating2 ? <Animation isAnimating={this.state.isAnimating} isAnimating2={this.state.isAnimating2} showContent={this.state.showContent}/> : null}
       </div>
