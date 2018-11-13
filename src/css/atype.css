@@ -51,8 +51,24 @@
   }
 }
 
+@media only screen and (max-width: 730px) {
+  .associatetype {
+    margin: auto;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 80px;
+    height: 80px;
+    width: 70%;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .sub-title {
     font-size: 28px;
+  }
+
+  .sub-title.atype-title {
+    font-size: 24px;
+    margin-top: 5px;
   }
 }

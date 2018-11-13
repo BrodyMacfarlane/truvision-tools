@@ -96,7 +96,7 @@
   height: 140px;
   color: #458CC8;
   font-weight: 800;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .product-info {
@@ -223,4 +223,77 @@
   border-radius: 50%;
   padding: 3px;
   background-color: #FFF;
+}
+
+@media only screen and (max-width: 970px) {
+  .products-sidebar {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .right-shop-container {
+    width: 180px;
+    padding: 54px 12px 0px 12px;
+  }
+
+  .cart-title {
+    font-size: 24px;
+  }
+
+  .shop-step {
+    position: fixed;
+    font-size: 10px;
+    height: 54px;
+    width: 100%;
+    line-height: 54px;
+    top: inherit;
+    right: 0;
+    bottom: 0px;
+    border-radius: 0px;
+    text-transform: uppercase;
+  }
+
+  .shop-step:hover {
+    transform: none;
+  }
+
+  .cart-item-name {
+    font-size: 12px;
+  }
+
+  .cart-item-type {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .shop-circle {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .shop-circle:hover {
+    width: 240px;
+  }
+
+  .shop-circle:hover #shop-circle-text {
+    width: 48px;
+  }
+  
+  .shop-circle:hover .bag-img{
+    width: 24px;
+  }
+
+  #shop-circle-text {
+    font-size: 14px;
+  }
+  
+  .shop-circle:hover #shop-circle-text {
+    width: 48px;
+  }
+
+  .bag-img {
+    width: 33px;
+  }
 }

@@ -8,7 +8,8 @@ export default class Autoship extends Component {
     super(props)
     this.state = {
       shortenedLink: "",
-      showCopiedText: false
+      showCopiedText: false,
+      generatedCart: []
     }
     this.shortenLink = this.shortenLink.bind(this)
     this.copyToClipboard = this.copyToClipboard.bind(this)
@@ -25,11 +26,13 @@ export default class Autoship extends Component {
   }
 
   shortenLink(){
-    axios.post('/api/getShortLink', {username: this.props.username, aType: this.props.aType, countryCode: this.props.countryCode, cart: this.props.cart})
-      .then(response => {
-        let resp = response.data.data
-        this.setState({shortenedLink: resp.url})
-      })
+    if(this.state.generatedCart !== this.props.cart){
+      axios.post('/api/getShortLink', {username: this.props.username, aType: this.props.aType, countryCode: this.props.countryCode, cart: this.props.cart})
+        .then(response => {
+          let resp = response.data.data
+          this.setState({shortenedLink: resp.url, generatedCart: this.props.cart})
+        })
+    }
   }
 
   render(){
@@ -46,11 +49,11 @@ export default class Autoship extends Component {
           </div>
         </div>
         <div className="final-content-container">
-          <button className="generate-link" onClick={this.shortenLink}>Generate bit.ly URL</button>
+          <button disabled={this.state.generatedCart === this.props.cart} className="generate-link" onClick={this.shortenLink}>Generate bit.ly URL</button>
         </div>
         <div className="final-input-container">
-          <div>
-            <input id="url-input" readonly value={this.state.shortenedLink} ref={(textarea) => this.textArea = textarea} type="text"/>
+          <div className="url-input-container">
+            <input id="url-input" readOnly value={this.state.shortenedLink} ref={(textarea) => this.textArea = textarea} type="text"/>
           </div>
           <div className="clip-boi-container" onClick={this.copyToClipboard}>
             <img src={clipBoi} alt="" className="clip-boi"/>

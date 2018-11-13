@@ -25,6 +25,7 @@
 }
 
 #url-input {
+  width: 100%;
   padding: 6px 50px 6px 50px;
   text-align: center;
   border: none;
@@ -61,6 +62,13 @@ button:hover {
   color: #FFF;
 }
 
+button:disabled {
+  background-color: #ddd;
+  color: #666;
+  border-color: #666;
+  cursor: default;
+}
+
 .clip-boi-container {
   cursor: pointer;
 }
@@ -82,4 +90,50 @@ button:hover {
   left: 0px;
   animation: fade 2.5s ease-in-out;
   opacity: 0;
+}
+
+@media only screen and (max-width: 1200px) {
+  #url-input {
+    padding: 6px 20px 6px 20px;
+    border-bottom: 6px solid #DDDDDD;
+    font-size: 40px;
+  }
+
+  .url-input-container {
+    width: 90%;
+  }
+
+  .clip-boi {
+    height: 40px;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  #url-input {
+    font-size: 24px;
+  }
+
+  .url-input-container {
+    width: 80%;
+  }
+
+  button {
+    width: 80%;
+    height: 80px;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #url-input {
+    font-size: 14px;
+  }
+
+  .clip-boi {
+    height: 30px;
+  }
+
+  button {
+    font-size: 12px;
+  }
 }

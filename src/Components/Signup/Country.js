@@ -13,10 +13,12 @@ export default class Country extends Component {
 
   componentDidMount(){
     console.log("Mounted")
-    axios.get('/api/getCountries')
+    if(!this.state.countries.length){
+      axios.get('/api/getCountries')
       .then((response) => {
         this.setState({countries: response.data})
       })
+    }
   }
   
   render(){

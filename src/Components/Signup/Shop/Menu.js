@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import exit from '../../../assets/SVG/exit.svg'
+import logo from "../../../assets/logo.svg";
 
 const regionids = {
   "US": 1,
@@ -63,7 +63,7 @@ export default class Autoship extends Component {
             return (
               <div key={i} className="product">
                 {/* <div className="product-img">SKU#{product.sku}</div> */}
-                <img src={`https://truvision.corpadmin.directscale.com/CMS/Images/Inventory/${product.image}`} alt={`SKU#${product.sku}`} className="product-img"/>
+                <img src={product.image ? `https://truvision.corpadmin.directscale.com/CMS/Images/Inventory/${product.image}` : logo} alt={`SKU#${product.sku}`} className="product-img"/>
                 <div className="product-info">
                   <div className="product-name">
                     {product.productname}

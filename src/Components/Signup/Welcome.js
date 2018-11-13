@@ -21,7 +21,7 @@ export default class Username extends Component {
         </div>
         <div className="intro-container content-container">
           <div className="intro description">
-            Welcome to TruVision Tools.  Here you will be able to set up an enrollment in a simple manner.  If you have any questions or comments, please send me an email at <span id="copy">Brody@truvisionhealth.com</span>.<br />Click "Get Started" below to set up a new account!
+            Welcome to TruVision Tools.  Here you will be able to set up an enrollment in a simple manner.  If you have any questions or comments, please send an email to <span id="copy">Web@truvisionhealth.com</span>.<br />Click "Get Started" below to set up a new account!
           </div>
         </div>
         <div className="circle-container content-container" onClick={this.props.incrementPage}>
