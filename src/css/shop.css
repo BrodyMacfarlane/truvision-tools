@@ -115,7 +115,6 @@
   height: calc(100vh - 177px);
   text-align: right;
   overflow: scroll;
-  -webkit-overflow-scrolling: touch;
   border-left: 3px solid #eee;
 }
 
