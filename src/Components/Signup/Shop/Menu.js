@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from '../../Loading/Loading';
 import axios from 'axios';
 import logo from "../../../assets/logo.svg";
 
@@ -59,6 +60,13 @@ export default class Autoship extends Component {
           </div>
         </div>
         <div className="products-container">
+          {
+            this.state.products.length <= 0
+            ? 
+              <Loading/>
+            :
+            null
+          }
           {this.state.products.map((product, i) => {
             return (
               <div key={i} className="product">
@@ -70,7 +78,7 @@ export default class Autoship extends Component {
                   </div>
                 </div>
                 <div className="choose-store">
-                  {product.stores.indexOf(4) > -1 ? <div className="add-product-type" onClick={() => {this.props.addToCart(product, "kit")}}>KIT</div> : null}
+                  {product.stores.indexOf(4) > -1 ? <div className="add-product-type" onClick={() => {this.props.addToCart(product, "kit")}}>ORDER</div> : null}
                   {product.stores.indexOf(5) > -1 ? <div className="add-product-type" onClick={() => {this.props.addToCart(product, "autoship")}}>AUTOSHIP</div> : null}
                 </div>
               </div>
@@ -102,7 +110,7 @@ export default class Autoship extends Component {
                             {this.state.productsDictionary[cartItem.itemcode].productname}
                           </div>
                           <div className="cart-item-type">
-                            {cartItem.type}
+                            {cartItem.type === "kit" ? "Order" : "Autoship"}
                           </div>
                         </div>
                       </div>

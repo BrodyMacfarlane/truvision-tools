@@ -92,6 +92,24 @@ button:disabled {
   opacity: 0;
 }
 
+.unshortened-link-input {
+  width: calc(100% - 36px);
+  border: none;
+  color: #2D3E4F;
+  border: 1px solid #eee;
+  padding: 9px 18px 9px 18px;
+  border-radius: 18px;
+}
+
+.unshortened-link-input:focus {
+  border: 1px solid #eee;
+}
+
+#unshortened-description-container div {
+  width: 100%;
+  display: block;
+}
+
 @media only screen and (max-width: 1200px) {
   #url-input {
     padding: 6px 20px 6px 20px;
@@ -105,6 +123,10 @@ button:disabled {
 
   .clip-boi {
     height: 40px;
+  }
+
+  #unshortened-description-container {
+    margin-top: 60px;
   }
 }
 
@@ -122,11 +144,23 @@ button:disabled {
     height: 80px;
     font-size: 20px;
   }
+
+  #unshortened-description-container {
+    margin-top: 30px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
   #url-input {
     font-size: 14px;
+  }
+
+  .unshortened-link-input {
+    margin-top: 18px;
+    width: calc(100% - 36px);
+    padding: 9px 18px 9px 18px;
+    border-radius: 12px;
+    font-size: 10px;
   }
 
   .clip-boi {

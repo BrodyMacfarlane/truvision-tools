@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Loading from '../Loading/Loading';
 import FlagIcon from 'react-flag-kit/lib/FlagIcon';
 import axios from 'axios';
 import '../../css/country.css';
+import logo from '../../assets/logo.svg'
 
 export default class Country extends Component {
   constructor(props){
@@ -12,7 +14,6 @@ export default class Country extends Component {
   }
 
   componentDidMount(){
-    console.log("Mounted")
     if(!this.state.countries.length){
       axios.get('/api/getCountries')
       .then((response) => {
@@ -37,6 +38,13 @@ export default class Country extends Component {
         <div className="countries-container content-container">
           <div>
             {
+              this.state.countries.length <= 0
+              ? 
+                <Loading/>
+              :
+              null
+            }
+            {
               this.state.countries.map((country, i) => {
                 return (
                   <div key={i} className={this.props.countryCode === country.countrycode ? "country country-selected" : "country"} onClick={(countrycode, countryname) => this.props.updateCountry(country.countrycode, country.countryname)}>
@@ -48,11 +56,17 @@ export default class Country extends Component {
             }
           </div>
         </div>
-        <div className="country-selected-container content-container">
-          <div className="description country-name">
-            {this.props.countryName}
-          </div>
-        </div>
+        {
+          this.state.countries.length > 0
+          ? 
+            <div className="country-selected-container content-container">
+              <div className="description country-name">
+                {this.props.countryName}
+              </div>
+            </div>
+          :
+          null
+        }
       </div>
     )
   }

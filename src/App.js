@@ -12,11 +12,36 @@ import './css/main.css';
 
 const atypes = ["Associate", "Retail Customer", "Preferred Customer"]
 
+function countTypes(typearr){
+  let kitcount = 0
+  let autoshipcount = 0
+  for(let i = 0; i < typearr.length; i++){
+    if(typearr[i] === "autoship") {
+      autoshipcount++
+    }
+    else {
+      kitcount++
+    }
+  }
+  return [kitcount, autoshipcount]
+}
+
+function numberOfEach(ic, itemcodes){
+  let count = 0
+  for(let i = 0; i < itemcodes.length; i++){
+    if(itemcodes[i] === ic) {
+      count++
+    }
+  }
+  return count
+}
+
 class App extends Component {
   constructor(){
     super()
     this.state = {
       page: 0,
+      animationHasRun: false,
       isAnimating: false,
       isAnimating2: false,
       showContent: true,
@@ -38,10 +63,10 @@ class App extends Component {
 
   incrementPage(){
     this.setState({shopopen: false})
-    if(this.state.page <= 0){
+    if(this.state.page <= 0 && this.state.animationHasRun === false){
       this.startAnimation()
     }
-    else if(this.state.page > 0){
+    else if(this.state.page >= 0){
       this.setState({
         page: this.state.page + 1
       })
@@ -87,11 +112,19 @@ class App extends Component {
       "qty": 1,
       "type": type
     }
-    let cartPos = this.state.cart.map((x) => {
+    let itemMap = this.state.cart.map((x) => {
       return x.itemcode
-    }).indexOf(refCartItem["itemcode"])
-    if(cartPos > -1 || this.state.cart.length > 2){
-      console.log('Individual item quantity limited to 1 and cart length limited to 3 items.')
+    })
+    let typeMap = this.state.cart.map((x) => {
+      return x.type
+    })
+    let countTypesMapped = countTypes(typeMap)
+    if(numberOfEach(refCartItem.itemcode, itemMap) > 1 || this.state.cart.length > 5 || (refCartItem.type === "kit" ? countTypesMapped[0] > 2 : countTypesMapped[1] > 2)){
+      // console.log("Individual item quantity limited to 1 and cart limited to 3 items of each type.")
+      console.log(countTypesMapped)
+    }
+    else if(itemMap.indexOf(cartItem.itemid) > -1 && typeMap[itemMap.indexOf(cartItem.itemid)] === type){
+      console.log("Already have this item and type.")
     }
     else {
       let cartArr = this.state.cart.concat(refCartItem)
@@ -114,7 +147,7 @@ class App extends Component {
         setTimeout(() => {
           this.setState({isAnimating: false})
           setTimeout(() => {
-            this.setState({isAnimating2: false})
+            this.setState({isAnimating2: false, animationHasRun: true})
           }, 500)
         }, 500)
       }, 2000)

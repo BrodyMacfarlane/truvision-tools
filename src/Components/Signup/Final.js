@@ -58,6 +58,14 @@ export default class Autoship extends Component {
           <div className="clip-boi-container" onClick={this.copyToClipboard}>
             <img src={clipBoi} alt="" className="clip-boi"/>
           </div>
+          <div id="unshortened-description-container" className="content-container">
+            <div className="description">
+              <div>Alternatively, you can use this unshortened link:</div>
+              <div className="unshortened-link">
+                <input className="unshortened-link-input" readOnly value={`https://secure.truvisionhealth.com/#/${this.props.username}/Application?type=${this.props.aType}&countrycode=${this.props.countryCode}&language=en-us&products=${JSON.stringify(this.props.cart)}`} type="text"/>
+              </div>
+            </div>
+          </div>
           {this.state.showCopiedText ? <div className="copied-text">Copied to clipboard!</div> : null}
         </div>
       </div>
