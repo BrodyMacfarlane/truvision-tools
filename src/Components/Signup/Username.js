@@ -21,13 +21,7 @@ export default class Username extends Component {
   }
 
   updateUsernameInputValue(e){
-    if(e.target.value === ""){
-      this.setState({
-        usernameInputValue: e.target.value
-      }, () => {
-        this.props.updateUsername(this.state.usernameInputValue)
-      })
-    } else if(/^[a-z0-9]+$/i.test(e.target.value)){
+    if(e.target.value === "" || /^[a-z0-9]+$/i.test(e.target.value)){
       this.setState({
         usernameInputValue: e.target.value
       }, () => {
