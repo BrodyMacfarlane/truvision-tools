@@ -26,7 +26,7 @@ a {
   width: 100%;
 }
 
-.nav, .title, .sub-title, .step, .menu-component-container, .beta-logo, .circle-text, .country, .associatetype, #shop-circle-text, .product-img, .add-product-type, .shop-step, .products-sidebar-title, .cart-title, .generate-link, .clip-boi {
+.nav, .title, .sub-title, .step, .menu-component-container, .beta-logo, .circle-text, .country, .associatetype, #shop-circle-text, .product-img, .add-product-type, .shop-step, .products-sidebar-title, .cart-title, .generate-link, .clip-boi, .animation-logo-container, .cart-image, .cart-item-type {
   user-select: none;
 }
 
@@ -66,7 +66,7 @@ a {
 .beta-logo {
   width: 120px;
   position: absolute;
-  bottom: 6px;
+  bottom: 9px;
   text-align: center;
   font-size: 16px;
   color: #FFF;
