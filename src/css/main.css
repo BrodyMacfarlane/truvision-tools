@@ -26,12 +26,17 @@ a {
   width: 100%;
 }
 
+.nav, .title, .sub-title, .step, .menu-component-container, .beta-logo, .circle-text, .country, .associatetype, #shop-circle-text, .product-img, .add-product-type, .shop-step, .products-sidebar-title, .cart-title, .generate-link, .clip-boi {
+  user-select: none;
+}
+
 .nav {
+  user-select: none;
   position: fixed;
   z-index: 100;
   margin-bottom: 60px;
   width: 100%;
-  height: auto; /* 63px */
+  height: 123px; /* 63px */
   background-color: #FFF;
   display: flex;
   justify-content: space-between;
@@ -76,6 +81,7 @@ a {
 }
 
 .menu-item {
+  color: #2D3E4F;
   display: inline-block;
   vertical-align: middle;
   font-size: 14px;
@@ -205,8 +211,17 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
+  .signup-container, .step {
+    margin-top: 123px;
+  }
+
   .component-container {
+    margin-top: 69px;
     width: 240px;
+  }
+
+  .shop-component-container {
+    margin-top: 0px;
   }
 
   .nav {

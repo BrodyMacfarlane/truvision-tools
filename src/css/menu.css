@@ -1,0 +1,73 @@
+.menu-component-container {
+  color: #2D3E4F;
+  background-color: #FFF;
+  position: fixed;
+  top: 108px;
+  right: 0px;
+  overflow: hidden;
+  z-index: 101;
+  height: 100%;
+  background-color: #2D3E4F;
+}
+
+.menu-component {
+  position: relative;
+  z-index: 102;
+}
+
+.menu-component-item {
+  width: 500px;
+  background-color: #2D3E4F;
+  color: #FFF;
+  height: 160px;
+  text-transform: uppercase;
+  font-weight: 800;
+  text-align: center;
+  line-height: 160px;
+  font-size: 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #FFF;
+  border-left: 1px solid transparent;
+}
+
+.menu-component-item:hover {
+  font-size: 18px;
+  background-color: #FFF;
+  color: #2D3E4F;
+  border-left: 1px solid #2D3E4F;
+}
+
+.menu-component-item:nth-child(1) {
+  border-top: 1px solid #2D3E4F;
+}
+
+.menu-component-item:last-child {
+  border-bottom: 1px solid #2D3E4F;
+}
+
+.menu-triangle {
+  position: fixed;
+  z-index: 99;
+  top: 99px;
+  right: 66px;
+  background-color: #2D3E4F;
+  width: 30px;
+  height: 30px;
+  transform: rotate(45deg);
+}
+
+@media only screen and (max-width: 800px){
+  .menu-component-container {
+    width: 100%;
+  }
+
+  .menu-component-item {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .menu-triangle {
+    right: 21px;
+  }
+}

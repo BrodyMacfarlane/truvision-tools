@@ -6,6 +6,7 @@ import Country from './Components/Signup/Country';
 import Atype from './Components/Signup/Atype';
 import Shop from './Components/Signup/Shop';
 import Final from './Components/Signup/Final';
+import Menu from './Components/Menu/Menu';
 import axios from 'axios';
 import logo from "./assets/logo.svg";
 import './css/main.css';
@@ -50,19 +51,21 @@ class App extends Component {
       countryname: "United States of America",
       atype: 1,
       shopopen: false,
-      cart: []
+      cart: [],
+      menuOpen: false
     }
     this.incrementPage = this.incrementPage.bind(this)
     this.decrementPage = this.decrementPage.bind(this)
     this.returnHome = this.returnHome.bind(this)
+    this.toggleMenu = this.toggleMenu.bind(this)
   }
 
   returnHome(){
-    this.setState({page: 0, shopopen: false})
+    this.setState({page: 0, shopopen: false, menuOpen: false})
   }
 
   incrementPage(){
-    this.setState({shopopen: false})
+    this.setState({shopopen: false, menuOpen: false})
     if(this.state.page <= 0 && this.state.animationHasRun === false){
       this.startAnimation()
     }
@@ -78,9 +81,14 @@ class App extends Component {
     }
   }
 
+  toggleMenu(){
+    this.setState({menuOpen: !this.state.menuOpen})
+  }
+
   decrementPage(){
     this.setState({
-      page: this.state.page - 1
+      page: this.state.page - 1,
+      menuOpen: false
     })
   }
 
@@ -89,19 +97,19 @@ class App extends Component {
   }
 
   updateCountry(countrycode, countryname){
-    this.setState({countrycode: countrycode, countryname: countryname}, () => {
+    this.setState({countrycode: countrycode, countryname: countryname, menuOpen: false}, () => {
       console.log(this.state.countrycode)
     })
   }
 
   updateAType(type){
-    this.setState({atype: type}, () => {
+    this.setState({atype: type, menuOpen: false}, () => {
       console.log(atypes[this.state.atype - 1])
     })
   }
 
   updateAutoship(bool){
-    this.setState({autoship: bool}, () => {
+    this.setState({autoship: bool, menuOpen: false}, () => {
       console.log(this.state.autoship)
     })
   }
@@ -128,14 +136,14 @@ class App extends Component {
     }
     else {
       let cartArr = this.state.cart.concat(refCartItem)
-      this.setState({cart: cartArr})
+      this.setState({cart: cartArr, menuOpen: false})
     }
   }
 
   removeFromCart(i){
     let cartArr = this.state.cart
     cartArr.splice(i, 1)
-    this.setState({cart: cartArr})
+    this.setState({cart: cartArr, menuOpen: false})
   }
 
   startAnimation(){
@@ -155,11 +163,11 @@ class App extends Component {
   }
 
   openShop(){
-    this.setState({shopopen: true})
+    this.setState({shopopen: true, menuOpen: false})
   }
 
   closeShop(){
-    this.setState({shopopen: false})
+    this.setState({shopopen: false, menuOpen: false})
   }
 
   render() {
@@ -172,10 +180,11 @@ class App extends Component {
           <div onClick={this.returnHome} className="nav-item nav-logo">
             <img className="logo" src={logo} />
           </div>
-          <div className="nav-item nav-menu">
+          <div onClick={this.toggleMenu} className="nav-item nav-menu">
             <div className="menu-item">MENU</div>
           </div>
         </div>
+        {this.state.menuOpen ? <Menu returnHome={this.returnHome}/> : null}
         <div className="step-container">
           {this.state.page > 0 && !this.state.shopopen ? <div id="prev-step" onClick={this.decrementPage} className="step"><div>PREV STEP</div></div> : null}
           <div className="signup-container">
