@@ -133,6 +133,11 @@ button:disabled {
 }
 
 @media only screen and (max-width: 950px) {
+
+  .clip-boi {
+    display: none;
+  }
+
   #url-input {
     font-size: 24px;
   }
