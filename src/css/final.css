@@ -140,6 +140,7 @@ button:disabled {
 
   #url-input {
     font-size: 24px;
+    width: auto;
   }
 
   .url-input-container {
