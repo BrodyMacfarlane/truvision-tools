@@ -14,6 +14,7 @@ export default class Autoship extends Component {
     this.shortenLink = this.shortenLink.bind(this)
     this.copyToClipboard = this.copyToClipboard.bind(this)
     this.highlightLink = this.highlightLink.bind(this)
+    this.copyText = this.copyText.bind(this)
   }
 
   copyToClipboard = (e) => {
@@ -37,12 +38,33 @@ export default class Autoship extends Component {
   }
 
   highlightLink(input){
-    if(input === 1){
-      this.textArea.setSelectionRange(0, this.state.shortenedLink.length)
+    let isiOSDevice = navigator.userAgent.match(/ipad|iphone/i)
+    if(!isiOSDevice) {
+      input.setSelectionRange(0, input.value.length)
+      this.copyText()
     }
     else {
-      this.longLink.setSelectionRange(0, this.longLink.value.length)
+      var range = document.createRange();
+      range.selectNodeContents(input);
+
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      setTimeout(() => {
+        input.setSelectionRange(0, 9999);
+        this.copyText()
+      }, 10)
     }
+  }
+
+  copyText(){
+    document.execCommand('copy')
+    this.setState({showCopiedText: true}, () => {
+      setTimeout(() => {
+        this.setState({showCopiedText: false})
+      }, 2500)
+    })
   }
 
   render(){
@@ -63,7 +85,7 @@ export default class Autoship extends Component {
         </div>
         <div className="final-input-container">
           <div className="url-input-container">
-            <input onClick={(num) => this.highlightLink(1)} id="url-input" readOnly value={this.state.shortenedLink} ref={(textarea) => this.textArea = textarea} type="text"/>
+            <input onClick={(input) => this.highlightLink(this.textArea)} id="url-input" value={this.state.shortenedLink} ref={(textarea) => this.textArea = textarea} type="text"/>
           </div>
           <div className="clip-boi-container" onClick={this.copyToClipboard}>
             <img src={clipBoi} alt="" className="clip-boi"/>
@@ -72,7 +94,7 @@ export default class Autoship extends Component {
             <div className="description">
               <div>Alternatively, you can use this unshortened link:</div>
               <div className="unshortened-link">
-                <input onClick={(num) => this.highlightLink(2)} ref={(input) => {this.longLink = input}} className="unshortened-link-input" readOnly value={`https://secure.truvisionhealth.com/#/${this.props.username}/Application?type=${this.props.aType}&countrycode=${this.props.countryCode}&language=en-us&products=${JSON.stringify(this.props.cart)}`} type="text"/>
+                <input onClick={(input) => this.highlightLink(this.longLink)} ref={(input) => {this.longLink = input}} className="unshortened-link-input" value={`https://secure.truvisionhealth.com/#/${this.props.username}/Application?type=${this.props.aType}&countrycode=${this.props.countryCode}&language=en-us&products=${JSON.stringify(this.props.cart)}`} type="text"/>
               </div>
             </div>
           </div>
