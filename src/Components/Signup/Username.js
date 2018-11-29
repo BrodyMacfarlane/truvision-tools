@@ -46,6 +46,15 @@ export default class Username extends Component {
         <div className="input-container content-container">
           <input value={this.props.username} onKeyPress={this.checkEnter} onChange={e => this.updateUsernameInputValue(e)} type="text" placeholder="Type here" className="username-input"/>
         </div>
+        <div className="notice-container content-container">
+          <div className="description">
+            Note: This is your website subdomain.
+            <br/>
+            If your website is "exampleaccount.truvisionhealth.com",
+            <br/>
+            then your username would be "exampleaccount".
+          </div>
+        </div>
       </div>
     )
   }

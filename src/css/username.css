@@ -12,6 +12,12 @@
   transition: 0.2s ease-in-out;
 }
 
+.notice-container .description {
+  margin-top: 30px;
+  font-size: 14px;
+  line-height: 24px;
+}
+
 input:focus {
   outline: none;
   border-bottom: 12px solid #458CC8;
@@ -37,5 +43,11 @@ input:focus {
 @media only screen and (max-width: 600px) {
   .username-input {
     font-size: 20px;
+  }
+
+  .notice-container .description {
+    margin-top: 30px;
+    font-size: 12px;
+    line-height: 18px;
   }
 }
