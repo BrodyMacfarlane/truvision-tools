@@ -98,13 +98,13 @@ class App extends Component {
 
   updateCountry(countrycode, countryname){
     this.setState({countrycode: countrycode, countryname: countryname, menuOpen: false}, () => {
-      console.log(this.state.countrycode)
+      this.incrementPage()
     })
   }
 
   updateAType(type){
     this.setState({atype: type, menuOpen: false}, () => {
-      console.log(atypes[this.state.atype - 1])
+      this.incrementPage()
     })
   }
 
