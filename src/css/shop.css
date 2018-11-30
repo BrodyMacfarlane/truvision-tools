@@ -226,6 +226,11 @@
   background-color: #FFF;
 }
 
+.product-sku {
+  opacity: 0.6;
+  font-size: 10px;
+}
+
 @media only screen and (max-width: 970px) {
   .products-sidebar {
     display: none;
@@ -290,6 +295,10 @@
   .product-info {
     padding: 12px;
     font-size: 10px;
+  }
+
+  .product-sku {
+    font-size: 8px;
   }
 
   .add-product-type {

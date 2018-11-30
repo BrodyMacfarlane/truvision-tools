@@ -1,4 +1,6 @@
-select itemid, sku, productname, categoryid, image, ARRAY_AGG(storeid) stores from products
-where regionid = $1 and associatetypeid = $2
-group by itemid, sku, productname, categoryid, image
-order by itemid asc
+select a.itemid, a.sku, a.productname, a.categoryid, a.image, ARRAY_AGG(a.storeid) stores, b.sortorder
+from products a
+join sortorder b on a.itemid = b.itemid
+where a.regionid = 1 and a.associatetypeid = 1
+group by a.itemid, a.sku, a.productname, a.categoryid, a.image, b.sortorder
+order by b.sortorder asc
