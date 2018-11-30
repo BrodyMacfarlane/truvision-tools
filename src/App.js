@@ -97,20 +97,14 @@ class App extends Component {
   }
 
   updateCountry(countrycode, countryname){
-    this.setState({countrycode: countrycode, countryname: countryname, menuOpen: false}, () => {
+    this.setState({countrycode: countrycode, countryname: countryname, menuOpen: false, cart: []}, () => {
       this.incrementPage()
     })
   }
 
   updateAType(type){
-    this.setState({atype: type, menuOpen: false}, () => {
+    this.setState({atype: type, menuOpen: false, cart: []}, () => {
       this.incrementPage()
-    })
-  }
-
-  updateAutoship(bool){
-    this.setState({autoship: bool, menuOpen: false}, () => {
-      console.log(this.state.autoship)
     })
   }
 
