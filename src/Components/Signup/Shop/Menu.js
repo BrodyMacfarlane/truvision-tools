@@ -70,7 +70,6 @@ export default class Autoship extends Component {
           {this.state.products.map((product, i) => {
             return (
               <div key={i} className="product">
-                {/* <div className="product-img">SKU#{product.sku}</div> */}
                 <img src={product.image ? `https://truvision.corpadmin.directscale.com/CMS/Images/Inventory/${product.image}` : logo} alt={`SKU#${product.sku}`} className="product-img"/>
                 <div className="product-info">
                   <div className="product-name">
