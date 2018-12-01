@@ -32,7 +32,6 @@ export default class Autoship extends Component {
   }
 
   componentDidMount(){
-    // this.props.getProducts()
     axios.post('/api/getProducts', {region: regionids[this.props.countryCode], atype: this.props.aType})
       .then(response => {
         this.setState({products: response.data}, () => {
