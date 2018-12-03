@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import dotenv from 'dotenv';
 import ReactGA from 'react-ga';
 import Username from './Components/Signup/Username';
 import Welcome from './Components/Signup/Welcome';
@@ -14,7 +13,7 @@ import logo from "./assets/logo.svg";
 import './css/main.css';
 
 function initializeReactGA() {
-  ReactGA.initialize(process.env.GA_TOKEN);
+  ReactGA.initialize("UA-130383403-1");
   ReactGA.pageview('/');
 }
 
