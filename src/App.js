@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
 import Username from './Components/Signup/Username';
 import Welcome from './Components/Signup/Welcome';
 import Animation from './Components/Signup/Animation';
@@ -11,11 +10,6 @@ import Menu from './Components/Menu/Menu';
 import axios from 'axios';
 import logo from "./assets/logo.svg";
 import './css/main.css';
-
-function initializeReactGA() {
-  ReactGA.initialize("UA-130383403-1");
-  ReactGA.pageview('/');
-}
 
 const atypes = ["Associate", "Retail Customer", "Preferred Customer"]
 
