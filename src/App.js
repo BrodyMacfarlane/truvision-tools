@@ -50,7 +50,7 @@ class App extends Component {
       countrycode: "US",
       countryname: "United States of America",
       atype: 1,
-      shopopen: true,
+      shopopen: false,
       cart: [],
       menuOpen: false
     }
