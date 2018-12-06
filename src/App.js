@@ -41,7 +41,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      page: 4,
+      page: 0,
       animationHasRun: false,
       isAnimating: false,
       isAnimating2: false,
