@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Loading from '../../Loading/Loading';
+import NoResults from '../../Loading/NoResults';
 import axios from 'axios';
 import logo from "../../../assets/logo.svg";
+import searchimg from "../../../assets/SVG/search.svg";
 
 const regionids = {
   "US": 1,
@@ -27,8 +29,14 @@ export default class Autoship extends Component {
       products: [],
       category: 0,
       copying: false,
-      productsDictionary: null
+      productsDictionary: null,
+      searchValue: "",
+      resultsFound: true,
+      showLoading: true
     }
+    this.updateSearchValue = this.updateSearchValue.bind(this)
+    this.checkEnter = this.checkEnter.bind(this)
+    this.searchNewProducts = this.searchNewProducts.bind(this)
   }
 
   componentDidMount(){
@@ -41,6 +49,33 @@ export default class Autoship extends Component {
           }
           this.setState({productsDictionary: productsDictionaryPregame})
         })
+      })
+  }
+
+  checkEnter(e){
+    if(e.key === "Enter"){
+      this.searchNewProducts()
+    }
+  }
+
+  updateSearchValue(e){
+    if(e.target.value === "" || /^[a-z0-9 '-()]+$/i.test(e.target.value)){
+      this.setState({
+        searchValue: e.target.value
+      })
+    }
+  }
+
+  searchNewProducts(){
+    this.setState({products: [], showLoading: true, resultsFound: true})
+    axios.post('/api/searchProducts', {region: regionids[this.props.countryCode], atype: this.props.aType, keyword: ["%", this.state.searchValue, "%"].join("")})
+      .then(response => {
+        if(response.data.length > 0){
+          this.setState({products: response.data})
+        }
+        else {
+          this.setState({resultsFound: false, showLoading: false})
+        }
       })
   }
 
@@ -59,8 +94,17 @@ export default class Autoship extends Component {
           </div>
         </div>
         <div className="products-container">
+        <div className="products-search-container">
+          <div className="products-search">
+            <input onChange={e => this.updateSearchValue(e)} onKeyPress={this.checkEnter} value={this.state.searchValue} type="text" placeholder="Search Products" className="products-searchbar"/>
+            <img onClick={this.searchNewProducts} src={searchimg} alt="" className="search-img"/>
+          </div>
+        </div>
           {
-            this.state.products.length <= 0
+            !this.state.resultsFound ? <NoResults/> : null
+          }
+          {
+            this.state.products.length <= 0 && this.state.showLoading
             ? 
               <Loading/>
             :
@@ -111,7 +155,7 @@ export default class Autoship extends Component {
                             {this.state.productsDictionary[cartItem.itemcode].productname}
                           </div>
                           <div className="cart-item-type">
-                            {cartItem.type === "kit" ? "Order" : "Autoship"}
+                            {cartItem.type === "kit" ? "Enroll" : "Autoship"}
                           </div>
                         </div>
                       </div>

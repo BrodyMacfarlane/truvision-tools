@@ -164,15 +164,24 @@
   transition: 0.2s ease-in-out;
 }
 
-.loading-component {
-  margin-top: 15vh;
+.loading-component, .no-results-component {
+  margin-top: 25vh;
 }
 
-.loading-text {
+.loading-text, .no-results-text {
   color: #2D3E4F;
   font-size: 36px;
   font-weight: 800;
+}
+
+.loading-text {
   animation: 2s dainty2 ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+.no-results-smaller-text {
+  font-size: 28px;
+  font-weight: 500;
 }
 
 .lds-ellipsis {
@@ -221,5 +230,15 @@
 
   .animation-logo-container img {
     width: 28vh;
+  }
+}
+
+@media only screen and (max-width: 730px){
+  .loading-text, .no-results-text {
+    font-size: 24px;
+  }
+
+  .no-results-smaller-text {
+    font-size: 18px;
   }
 }

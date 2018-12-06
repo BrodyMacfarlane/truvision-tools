@@ -41,7 +41,7 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      page: 0,
+      page: 4,
       animationHasRun: false,
       isAnimating: false,
       isAnimating2: false,
@@ -50,7 +50,7 @@ class App extends Component {
       countrycode: "US",
       countryname: "United States of America",
       atype: 1,
-      shopopen: false,
+      shopopen: true,
       cart: [],
       menuOpen: false
     }

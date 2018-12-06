@@ -33,6 +33,13 @@ app.post('/api/getProducts', (req, res) => {
   })
 })
 
+app.post('/api/searchProducts', (req, res) => {
+  const db = app.get('db')
+  db.search_products([req.body.region, req.body.atype, req.body.keyword]).then(response => {
+    res.send(response)
+  })
+})
+
 app.post('/api/getShortLink', (req, res) => {
   let encodedURL = encodeURIComponent(`https://secure.truvisionhealth.com/#/${req.body.username}/Application?type=${req.body.aType}&countrycode=${req.body.countryCode}&language=en-us&products=${JSON.stringify(req.body.cart)}`)
   axios.get(`https://api-ssl.bitly.com/v3/shorten?access_token=${process.env.BITLY_ACCESS_TOKEN}&longUrl=${encodedURL}`)
@@ -40,6 +47,7 @@ app.post('/api/getShortLink', (req, res) => {
       res.send(response.data)
     })
 })
+
 
 const path = require('path')
 app.get('*', (req, res)=>{
