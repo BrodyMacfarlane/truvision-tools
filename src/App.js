@@ -167,9 +167,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="beta-container">
-          <div className="beta-logo">Beta</div>
-        </div>
         <div className="nav">
           <div onClick={this.returnHome} className="nav-item nav-logo">
             <img className="logo" src={logo} />
