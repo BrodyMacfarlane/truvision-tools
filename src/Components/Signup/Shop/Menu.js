@@ -5,6 +5,7 @@ import axios from 'axios';
 import logo from "../../../assets/logo.svg";
 import searchimg from "../../../assets/SVG/search.svg";
 
+
 const regionids = {
   "US": 1,
   "GB":	2,
@@ -89,7 +90,7 @@ export default class Autoship extends Component {
               Categories
             </div>
             <div className="categories">
-              Coming soon!
+              categories.map
             </div>
           </div>
         </div>

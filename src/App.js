@@ -121,7 +121,7 @@ class App extends Component {
       return x.type
     })
     let countTypesMapped = countTypes(typeMap)
-    if(numberOfEach(refCartItem.itemcode, itemMap) > 1 || this.state.cart.length > 5 || (refCartItem.type === "kit" ? countTypesMapped[0] > 2 : countTypesMapped[1] > 2)){
+    if(numberOfEach(refCartItem.itemcode, itemMap) > 1 || this.state.cart.length >= 14 || (refCartItem.type === "kit" ? countTypesMapped[0] >= 7 : countTypesMapped[1] >= 7)){
       // console.log("Individual item quantity limited to 1 and cart limited to 3 items of each type.")
       console.log(countTypesMapped)
     }
