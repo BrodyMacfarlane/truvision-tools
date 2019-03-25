@@ -90,7 +90,7 @@ export default class Autoship extends Component {
               Categories
             </div>
             <div className="categories">
-              categories.map
+              Coming soon...
             </div>
           </div>
         </div>
