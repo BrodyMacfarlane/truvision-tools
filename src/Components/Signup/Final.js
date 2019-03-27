@@ -31,7 +31,7 @@ export default class Autoship extends Component {
     if(this.state.generatedCart !== this.props.cart){
       axios.post('/api/getShortLink', {username: this.props.username, aType: this.props.aType, countryCode: this.props.countryCode, cart: this.props.cart})
         .then(response => {
-          let resp = response.data.data
+          let resp = response.data
           this.setState({shortenedLink: resp.url, generatedCart: this.props.cart})
         })
     }
@@ -77,11 +77,11 @@ export default class Autoship extends Component {
         </div>
         <div className="final-description-container content-container">
           <div className="description">
-            Please click the button below to generate your shareable bit.ly link.
+            Please click the button below to generate your shareable truvis.io link.
           </div>
         </div>
         <div className="final-content-container">
-          <button disabled={this.state.generatedCart === this.props.cart} className="generate-link" onClick={this.shortenLink}>Generate bit.ly URL</button>
+          <button disabled={this.state.generatedCart === this.props.cart} className="generate-link" onClick={this.shortenLink}>Generate truvis.io URL</button>
         </div>
         <div className="final-input-container">
           <div className="url-input-container">

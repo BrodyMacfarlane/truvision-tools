@@ -41,10 +41,11 @@ app.post('/api/searchProducts', (req, res) => {
 })
 
 app.post('/api/getShortLink', (req, res) => {
-  let encodedURL = encodeURIComponent(`https://secure.truvisionhealth.com/#/${req.body.username}/Application?type=${req.body.aType}&countrycode=${req.body.countryCode}&language=en-us&products=${JSON.stringify(req.body.cart)}`)
-  axios.get(`https://api-ssl.bitly.com/v3/shorten?access_token=${process.env.BITLY_ACCESS_TOKEN}&longUrl=${encodedURL}`)
+  let encodedURL = `https://secure.truvisionhealth.com/#/${req.body.username}/Application?type=${req.body.aType}&countrycode=${req.body.countryCode}&language=en-us&products=${JSON.stringify(req.body.cart)}`
+  axios.post('http://truvis.io/api/createLink', {link: encodedURL})
     .then(response => {
-      res.send(response.data)
+      let shorturl = response.data[0].shorturl
+      res.send({url: `truvis.io/${shorturl}`})
     })
 })
 
