@@ -94,7 +94,7 @@ export default class Autoship extends Component {
             <div className="description">
               <div>Alternatively, you can use this unshortened link:</div>
               <div className="unshortened-link">
-                <input onClick={(input) => this.highlightLink(this.longLink)} ref={(input) => {this.longLink = input}} className="unshortened-link-input" value={`https://secure.truvisionhealth.com/#/${this.props.username}/Application?type=${this.props.aType}&countrycode=${this.props.countryCode}&language=en-us&products=${JSON.stringify(this.props.cart)}`} type="text"/>
+                <input onClick={(input) => this.highlightLink(this.longLink)} ref={(input) => {this.longLink = input}} className="unshortened-link-input" value={`https://secure.truvisionhealth.com/#/${this.props.username}/Application?${this.props.aType === 1 ? "cpn=tvt&" : ""}type=${this.props.aType}&countrycode=${this.props.countryCode}&language=en-us&products=${JSON.stringify(this.props.cart)}`} type="text"/>
               </div>
             </div>
           </div>
