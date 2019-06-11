@@ -197,10 +197,6 @@ a {
     width: 240px;
   }
 
-  .shop-component-container {
-    margin-top: 0px;
-  }
-
   .nav {
     border-bottom: 2px solid #eee;
   }
@@ -214,11 +210,11 @@ a {
   }
 
   .sub-title {
-    font-size: 36px;
+    font-size: 42px;
   }
 
   .description {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 20px;
   }
 }

@@ -15,9 +15,7 @@ export default class Autoship extends Component {
   render(){
     return (
       <div>
-        <div className="shop-component-container component-container">
-          {!this.props.shopopen ? <ShopContent openShop={this.props.openShop}/> : null}
-        </div>
+        {!this.props.shopopen ? <ShopContent openShop={this.props.openShop}/> : null}
         {this.props.shopopen ? <Menu incrementPage={this.props.incrementPage} username={this.props.username} autoship={this.props.autoship} countryCode={this.props.countryCode} aType={this.props.aType} closeShop={this.props.closeShop} addToCart={(cartItem, type) => {this.props.addToCart(cartItem, type)}} removeFromCart={(i) => {this.props.removeFromCart(i)}} cart={this.props.cart}/> : null}
       </div>
     )

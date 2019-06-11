@@ -5,8 +5,10 @@ import Animation from './Components/Signup/Animation';
 import Country from './Components/Signup/Country';
 import Atype from './Components/Signup/Atype';
 import Shop from './Components/Signup/Shop';
+import Summary from './Components/Signup/Summary';
 import Final from './Components/Signup/Final';
 import Menu from './Components/Menu/Menu';
+import Import from './Components/Menu/Import';
 import axios from 'axios';
 import logo from "./assets/logo.svg";
 import './css/main.css';
@@ -52,16 +54,26 @@ class App extends Component {
       atype: 1,
       shopopen: false,
       cart: [],
-      menuOpen: false
+      menuOpen: false,
+      isImporting: false,
+      returnPage: 0
     }
     this.incrementPage = this.incrementPage.bind(this)
     this.decrementPage = this.decrementPage.bind(this)
     this.returnHome = this.returnHome.bind(this)
     this.toggleMenu = this.toggleMenu.bind(this)
+    this.setPage = this.setPage.bind(this)
+    this.showImport = this.showImport.bind(this)
+    this.hideImport = this.hideImport.bind(this)
+    this.importLink = this.importLink.bind(this)
   }
 
   returnHome(){
-    this.setState({page: 0, shopopen: false, menuOpen: false})
+    this.setState({page: 0, shopopen: false, menuOpen: false, isImporting: false})
+  }
+
+  setPage(page, shopopen){
+    this.setState({page: page, shopopen: shopopen, menuOpen: false, isImporting: false})
   }
 
   incrementPage(){
@@ -123,7 +135,7 @@ class App extends Component {
     let countTypesMapped = countTypes(typeMap)
     if(numberOfEach(refCartItem.itemcode, itemMap) > 1 || this.state.cart.length >= 14 || (refCartItem.type === "kit" ? countTypesMapped[0] >= 7 : countTypesMapped[1] >= 7)){
       // console.log("Individual item quantity limited to 1 and cart limited to 3 items of each type.")
-      console.log(countTypesMapped)
+      // console.log(countTypesMapped)
     }
     else if(itemMap.indexOf(cartItem.itemid) > -1 && typeMap[itemMap.indexOf(cartItem.itemid)] === type){
       console.log("Already have this item and type.")
@@ -164,6 +176,36 @@ class App extends Component {
     this.setState({shopopen: false, menuOpen: false})
   }
 
+  showImport(){
+    this.closeShop()
+    if(!this.state.isImporting){
+      this.setState({returnPage: this.state.page},
+        () => {
+          this.setState({isImporting: true, page: "importing"})
+        }
+      )
+    }
+  }
+
+  hideImport(){
+    this.setState({isImporting: false, page: this.state.returnPage})
+  }
+
+  importLink(username, associatetype, countrycode, cart){
+    this.setState({
+      username: username,
+      atype: associatetype,
+      countrycode: countrycode,
+      cart: cart
+    }, () => {
+      this.setPage(5, false)
+    })
+    console.log(`username: ${username}`)
+    console.log(`associate type: ${associatetype}`)
+    console.log(`country code: ${countrycode}`)
+    console.log(cart)
+  }
+
   render() {
     return (
       <div className="App">
@@ -175,7 +217,7 @@ class App extends Component {
             <div className="menu-item">MENU</div>
           </div>
         </div>
-        {this.state.menuOpen ? <Menu returnHome={this.returnHome}/> : null}
+        {this.state.menuOpen ? <Menu returnHome={this.returnHome} showImport={this.showImport}/> : null}
         <div className="step-container">
           {this.state.page > 0 && !this.state.shopopen ? <div id="prev-step" onClick={this.decrementPage} className="step"><div>PREV STEP</div></div> : null}
           <div className="signup-container">
@@ -184,11 +226,13 @@ class App extends Component {
             {this.state.page === 2 ? <Country countryCode={this.state.countrycode} countryName={this.state.countryname} updateCountry={this.updateCountry.bind(this)}/> : null}
             {this.state.page === 3 ? <Atype aType={this.state.atype} updateAType={this.updateAType.bind(this)}/> : null}
             {this.state.page === 4 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} incrementPage={this.incrementPage.bind(this)} addToCart={this.addToCart.bind(this)} removeFromCart={this.removeFromCart.bind(this)} cart={this.state.cart}/> : null}
-            {this.state.page === 5 ? <Final username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
+            {this.state.page === 5 ? <Summary username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
+            {this.state.page === 6 ? <Final username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
           </div>
-          {this.state.page > 0 && !this.state.shopopen && this.state.page < 4 ? <div id="next-step" onClick={this.incrementPage} className="step"><div>NEXT STEP</div></div> : null}
+          {this.state.page > 0 && !this.state.shopopen && (this.state.page < 4 || this.state.page === 5) ? <div id="next-step" onClick={this.incrementPage} className="step"><div>{this.state.page === 5 ? "FINALIZE" : "NEXT STEP"}</div></div> : null}
         </div>
         {this.state.isAnimating || this.state.isAnimating2 ? <Animation isAnimating={this.state.isAnimating} isAnimating2={this.state.isAnimating2} showContent={this.state.showContent}/> : null}
+        {this.state.isImporting ? <Import importLink={(username, associatetype, countrycode, cart) => {this.importLink(username, associatetype, countrycode, cart)}} showImport={this.showImport} hideImport={this.hideImport}/> : null}
       </div>
     );
   }

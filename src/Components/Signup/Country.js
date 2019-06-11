@@ -27,12 +27,12 @@ export default class Country extends Component {
       <div className="input-component-container component-container">
         <div className="title-container content-container">
           <div className="sub-title">
-            COUNTRY
+            Country
           </div>
         </div>
         <div className="countries-description-container content-container">
           <div className="description">
-            Please select the country your new associate currently resides in.
+            Please select the country your new enrollment currently resides in.
           </div>
         </div>
         <div className="countries-container content-container">

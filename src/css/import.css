@@ -1,0 +1,111 @@
+.import-component-container {
+  width: 100vw;
+  height: calc(100vh - 123px);
+  background-color: #FFF;
+  z-index: 100;
+}
+
+.import-close-svg {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 50px;
+}
+
+.import-submit-cancel-container {
+  text-align: center;
+}
+
+.import-input-container {
+  width: 100%;
+  text-align: center;
+}
+
+.import-input-outer {
+  width: 500px;
+  display: inline-block;
+}
+
+#import-input {
+  width: 100%;
+  text-align: center;
+  border: none;
+  border-bottom: 9px solid #DDDDDD;
+  font-size: 36px;
+  font-family: 'Montserrat';
+  font-weight: 800;
+  color: #2D3E4F;
+  transition: 0.2s ease-in-out;
+  margin-top: 24px;
+  margin-bottom: 42px;
+}
+
+.import-btn {
+  display: inline-block;
+  font-weight: 800;
+  color: #FFF;
+  margin-left: 6px;
+  margin-right: 6px;
+  cursor: pointer;
+  font-size: 24px;
+  border: 3px solid #FFF;
+}
+
+.submit-btn {
+  background-color: #458CC8;
+  padding: 30px 120px 30px 120px;
+}
+
+.cancel-btn {
+  background-color: #2D3E4F;
+  padding: 30px;
+}
+
+.import-btn:hover {
+  background-color: #FFF;
+}
+
+.submit-btn:hover {
+  border-color: #458CC8;
+  color: #458CC8;
+}
+
+.cancel-btn:hover {
+  border-color: #2D3E4F;
+  color: #2D3E4F;
+}
+
+#import-loading-container div {
+  margin-top: 0px;
+  text-align: center;
+}
+
+.invalid-link-import {
+  color: red;
+  text-align: center;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .import-input-outer {
+    width: 350px;
+  }
+
+  #import-input {
+    font-size: 24px;
+  }
+
+  .import-btn{
+    font-size: 18px;
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+
+  .submit-btn {
+    padding: 30px 60px 30px 60px;
+  }
+
+  .cancel-btn {
+    padding: 30px;
+  }
+}

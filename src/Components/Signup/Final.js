@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../../css/final.css';
 import clipBoi from '../../assets/SVG/clipboi.svg'
 
-export default class Autoship extends Component {
+export default class Final extends Component {
   constructor(props){
     super(props)
     this.state = {

@@ -7,7 +7,7 @@ export default class ShopContent extends Component {
   }
   render(){
     return (
-      <div>
+      <div className="shop-component-container component-container">
         <div className="title-container content-container">
           <div className="sub-title shop-title">
             Products

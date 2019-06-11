@@ -49,9 +49,20 @@ app.post('/api/getShortLink', (req, res) => {
     })
 })
 
+app.get('/api/getProductsFromIDs', (req, res) => {
+  const db = app.get('db')
+  db.get_products_from_ids()
+    .then(response => {
+      res.send(response)
+    })
+})
+
+app.post('/api/importLink', (req, res) => {
+  axios.post('http://truvis.io/api/importLink', {shorturl: shorturl})
+})
 
 const path = require('path')
-app.get('*', (req, res)=>{
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
 })
 

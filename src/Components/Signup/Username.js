@@ -35,7 +35,7 @@ export default class Username extends Component {
       <div className="input-component-container component-container">
         <div className="title-container content-container">
           <div className="sub-title">
-            USERNAME
+            Username
           </div>
         </div>
         <div className="input-description-container content-container">

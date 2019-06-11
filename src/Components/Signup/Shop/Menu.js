@@ -133,7 +133,7 @@ export default class Autoship extends Component {
         </div>
         <div className="right-shop-container">
           <div>
-            <div className="shop-step cart-next-step" onClick={this.props.incrementPage}>Finalize</div>
+            <div className="shop-step cart-next-step" onClick={this.props.incrementPage}>Summary</div>
             <div className="cart-title">
               Cart
             </div>

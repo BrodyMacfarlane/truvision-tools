@@ -16,7 +16,7 @@ export default class Atype extends Component {
       <div className="input-component-container component-container">
         <div className="title-container content-container">
           <div className="sub-title atype-title">
-            ASSOCIATE TYPE
+            Associate Type
           </div>
         </div>
         <div className="atypes-description-container content-container">

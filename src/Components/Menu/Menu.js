@@ -17,7 +17,7 @@ export default class Menu extends Component {
         <div className="menu-triangle"></div>
         <div className="menu-component">
           <div onClick={this.props.returnHome} className="menu-component-item">Start Over</div>
-          <div className="menu-component-item">Edit Existing URL - COMING SOON!</div>
+          <div onClick={this.props.showImport} className="menu-component-item">Read/Import Existing URL</div>
         </div>
       </div>
     )
