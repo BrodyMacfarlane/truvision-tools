@@ -41,7 +41,7 @@ export default class Import extends Component {
     this.setState({isSubmitting: true, invalidLink: false})
     let splitLink = this.state.link.split("/")
     let reformLink = splitLink[splitLink.length - 1].length > 0 ? splitLink[splitLink.length - 1] : splitLink[splitLink.length - 2]
-    axios.post("http://truvis.io/api/importLink", {shorturl: reformLink})
+    axios.post("https://truvis.io/api/importLink", {shorturl: reformLink})
       .then(response => {
         if(!response.data || response.data.length === 0 || !response.data.split("https://secure.truvisionhealth.com/#/")[1]){
           this.setState({invalidLink: true})

@@ -42,7 +42,7 @@ app.post('/api/searchProducts', (req, res) => {
 
 app.post('/api/getShortLink', (req, res) => {
   let encodedURL = `https://secure.truvisionhealth.com/#/${req.body.username}/Application?${req.body.aType === 1 ? "cpn=tvt&" : ""}type=${req.body.aType}&countrycode=${req.body.countryCode}&language=en-us&products=${JSON.stringify(req.body.cart)}`
-  axios.post('http://truvis.io/api/createLink', {link: encodedURL})
+  axios.post('https://truvis.io/api/createLink', {link: encodedURL})
     .then(response => {
       let shorturl = response.data[0].shorturl
       res.send({url: `truvis.io/${shorturl}`})
@@ -58,7 +58,7 @@ app.get('/api/getProductsFromIDs', (req, res) => {
 })
 
 app.post('/api/importLink', (req, res) => {
-  axios.post('http://truvis.io/api/importLink', {shorturl: shorturl})
+  axios.post('https://truvis.io/api/importLink', {shorturl: shorturl})
 })
 
 const path = require('path')
