@@ -136,7 +136,7 @@ async function getExavault(){
     })
 }
 
-app.get('/api/refreshExavault', (req, res) => {
+app.post('/api/refreshExavault', (req, res) => {
   deleteFiles().then(() => {
     getExavault()
   })
