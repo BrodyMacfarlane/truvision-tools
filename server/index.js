@@ -6,8 +6,6 @@ const express = require('express')
     , cors = require('cors')
     , massive = require('massive')
     , axios = require('axios')
-    , querystring = require('querystring')
-    , fs = require('fs')
 
 const app = express()
 
@@ -62,93 +60,6 @@ app.get('/api/getProductsFromIDs', (req, res) => {
 app.post('/api/importLink', (req, res) => {
   axios.post('https://truvis.io/api/importLink', {shorturl: shorturl})
 })
-
-
-
-
-
-
-
-
-// APP LOGIN
-
-const username = process.env.EXAVAULT_USER
-const password = process.env.EXAVAULT_PASS
-
-const path = "%2FApp%20Login"
-const baseDir = "/var/www/applogin.truvisiontools.com"
-
-// Establishing headers for the multiple Exavault API requests
-axios.defaults.headers.post['Content-Type'] = "application/x-www-form-urlencoded"
-axios.defaults.headers.post['api_key'] = process.env.EXAVAULT_API_KEY
-
-// Converting credentials to Exavault's required format
-const credentials = querystring.stringify({
-  "username": username,
-  "password": password
-});
-
-
-
-
-function deleteFiles(){
-  return new Promise((resolve, reject) => {
-    fs.readdir(baseDir, (err, files) => {
-      if(files.length > 0){
-        for(let i = 0; i < files.length; i++){
-          fs.unlink(`${baseDir}/${files[i]}`, () => {
-            if(i + 1 === files.length){
-              resolve()
-            }
-          })
-        }
-      }
-      else {
-        resolve()
-      }
-    })
-  })
-}
-
-async function getExavault(){
-  axios.post('https://api.exavault.com/v1.2/authenticateUser', credentials)
-    .then(response => {
-      const accessToken = response.data.results.accessToken;
-      const getFilesUrl = `https://api.exavault.com/v1.2/getResourceList?access_token=${accessToken}&path=${path}&sortBy=sort_files_date&sortOrder=desc`
-      axios.get(getFilesUrl)
-        .then(response => {
-          const resources = response.data.results.resources
-          for(let i = 0; i < resources.length; i++){
-            let fileUrl = resources[i].path
-            let resource = resources[i]
-            const getDownloadFileUrl = `https://api.exavault.com/v1.2/getDownloadFileUrl?access_token=${accessToken}&filePaths=${fileUrl}`
-            axios.get(getDownloadFileUrl)
-              .then(response => {
-                const downloadLink = response.data.results.url
-                axios.get(downloadLink, {responseType: "blob"})
-                  .then(response => {
-                    fs.writeFile(`${baseDir}/${resource.name}`, response.data, function(err){
-                    })
-                  })
-              })
-          }
-        })
-    })
-}
-
-app.get('/api/refreshExavault', (req, res) => {
-  deleteFiles().then(() => {
-    getExavault()
-  })
-})
-
-
-
-
-
-
-
-
 
 const path = require('path')
 app.get('*', (req, res) => {
