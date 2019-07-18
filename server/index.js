@@ -75,7 +75,7 @@ app.post('/api/importLink', (req, res) => {
 const username = process.env.EXAVAULT_USER
 const password = process.env.EXAVAULT_PASS
 
-const path = "%2FApp%20Login"
+const exavaultPath = "%2FApp%20Login"
 const baseDir = "/var/www/applogin.truvisiontools.com"
 
 // Establishing headers for the multiple Exavault API requests
@@ -114,7 +114,7 @@ async function getExavault(){
   axios.post('https://api.exavault.com/v1.2/authenticateUser', credentials)
     .then(response => {
       const accessToken = response.data.results.accessToken;
-      const getFilesUrl = `https://api.exavault.com/v1.2/getResourceList?access_token=${accessToken}&path=${path}&sortBy=sort_files_date&sortOrder=desc`
+      const getFilesUrl = `https://api.exavault.com/v1.2/getResourceList?access_token=${accessToken}&path=${exavaultPath}&sortBy=sort_files_date&sortOrder=desc`
       axios.get(getFilesUrl)
         .then(response => {
           const resources = response.data.results.resources
