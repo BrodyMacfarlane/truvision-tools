@@ -1,13 +1,12 @@
 .menu-component-container {
-  color: #2D3E4F;
-  background-color: #FFF;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
   position: fixed;
   top: 108px;
   right: 0px;
   overflow: hidden;
   z-index: 101;
   height: 100%;
-  background-color: #2D3E4F;
+  background-color: #FFF;
 }
 
 .menu-component {
@@ -17,8 +16,7 @@
 
 .menu-component-item {
   width: 500px;
-  background-color: #2D3E4F;
-  color: #FFF;
+  color: #2D3E4F;
   height: 160px;
   text-transform: uppercase;
   font-weight: 800;
@@ -26,23 +24,12 @@
   line-height: 160px;
   font-size: 16px;
   cursor: pointer;
-  border-bottom: 1px solid #FFF;
-  border-left: 1px solid transparent;
 }
 
 .menu-component-item:hover {
   font-size: 18px;
-  background-color: #FFF;
-  color: #2D3E4F;
-  border-left: 1px solid #2D3E4F;
-}
-
-.menu-component-item:nth-child(1) {
-  border-top: 1px solid #2D3E4F;
-}
-
-.menu-component-item:last-child {
-  border-bottom: 1px solid #2D3E4F;
+  background-color: #fcfcfc;
+  box-shadow: inset 0 0px 4px 0 hsla(0, 0%, 0%, 0.2);
 }
 
 .menu-triangle {
@@ -50,10 +37,20 @@
   z-index: 99;
   top: 99px;
   right: 66px;
-  background-color: #2D3E4F;
+  background-color: #FFF;
   width: 30px;
   height: 30px;
   transform: rotate(45deg);
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+.menu-triangle.menu-triangle-two {
+  box-shadow: none;
+  transform: initial;
+  width: 60px;
+  height: 45px;
+  top: 108px;
+  right: 52px;
 }
 
 @media only screen and (max-width: 800px){
@@ -69,5 +66,9 @@
 @media only screen and (max-width: 600px){
   .menu-triangle {
     right: 21px;
+  }
+
+  .menu-triangle.menu-triangle-two {
+    right: 7px;
   }
 }
