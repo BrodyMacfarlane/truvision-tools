@@ -15,7 +15,6 @@ const regionids = {
   "AU":	6,
   "ZA":	7,
   "DE":	8,
-  "BM":	26,
   "CR":	27,
   "IE":	28,
   "PA":	29,
@@ -46,13 +45,18 @@ export default class Autoship extends Component {
   componentDidMount(){
     axios.post('/api/getProducts', {region: regionids[this.props.countryCode], atype: this.props.aType})
       .then(response => {
-        this.setState({products: response.data}, () => {
-          let productsDictionaryPregame = {}
-          for(let i = 0; i < this.state.products.length; i++){
-            productsDictionaryPregame[this.state.products[i].itemid] = this.state.products[i]
-          }
-          this.setState({productsDictionary: productsDictionaryPregame})
-        })
+        if(response.data.length > 0){
+          this.setState({products: response.data}, () => {
+            let productsDictionaryPregame = {}
+            for(let i = 0; i < this.state.products.length; i++){
+              productsDictionaryPregame[this.state.products[i].itemid] = this.state.products[i]
+            }
+            this.setState({productsDictionary: productsDictionaryPregame})
+          })
+        }
+        else {
+          this.setState({resultsFound: false, showLoading: false})
+        }
       })
   }
 
