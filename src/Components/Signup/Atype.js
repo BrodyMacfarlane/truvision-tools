@@ -28,11 +28,8 @@ export default class Atype extends Component {
           <div className={this.props.aType === 1 ? "associatetype associatetype-selected" : "associatetype"} onClick={(type) => this.props.updateAType(1)}>
             <div>Associate</div>
           </div>
-          <div className={this.props.aType === 3 ? "associatetype associatetype-selected" : "associatetype"} onClick={(type) => this.props.updateAType(3)}>
-            <div>Preferred Customer</div>
-          </div>
           <div className={this.props.aType === 2 ? "associatetype associatetype-selected" : "associatetype"} onClick={(type) => this.props.updateAType(2)}>
-            <div>Retail Customer</div>
+            <div>Customer</div>
           </div>
         </div>
       </div>
