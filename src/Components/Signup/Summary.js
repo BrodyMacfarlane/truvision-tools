@@ -100,17 +100,10 @@ export default class Summary extends Component {
             </div>
             <div className="summary-info">{this.props.countryCode}</div>
           </div>
-          <div className="atype-summary-container summary-container">
-            <div className="summary-wrapper">
-              <div className="summary-description">Associate Type</div>
-              <div className="summary-change"><span id="not-bold">(<span className="change-summary" onClick={() => this.props.setPage(3, false)}>change</span>)</span></div>
-            </div>
-            <div className="summary-info">{associateTypes[this.props.aType - 1]}</div>
-          </div>
           <div className="cart-summary-container summary-container">
             <div className="summary-wrapper">
               <div className="summary-description">Cart</div>
-              <div className="summary-change"><span id="not-bold">(<span className="change-summary" onClick={() => this.props.setPage(4, true)}>change</span>)</span></div>
+              <div className="summary-change"><span id="not-bold">(<span className="change-summary" onClick={() => this.props.setPage(3, true)}>change</span>)</span></div>
             </div>
             <div className="summary-info-title">Autoship</div>
             <div className="summary-info">

@@ -3,7 +3,6 @@ import Username from './Components/Signup/Username';
 import Welcome from './Components/Signup/Welcome';
 import Animation from './Components/Signup/Animation';
 import Country from './Components/Signup/Country';
-import Atype from './Components/Signup/Atype';
 import Shop from './Components/Signup/Shop';
 import Summary from './Components/Signup/Summary';
 import Final from './Components/Signup/Final';
@@ -51,7 +50,7 @@ class App extends Component {
       username: "",
       countrycode: "US",
       countryname: "United States of America",
-      atype: 1,
+      atype: 2,
       shopopen: false,
       cart: [],
       menuOpen: false,
@@ -198,7 +197,7 @@ class App extends Component {
       countrycode: countrycode,
       cart: cart
     }, () => {
-      this.setPage(5, false)
+      this.setPage(4, false)
     })
     console.log(`username: ${username}`)
     console.log(`associate type: ${associatetype}`)
@@ -224,12 +223,11 @@ class App extends Component {
             {this.state.page <= 0 ? <Welcome incrementPage={this.incrementPage.bind(this)}/> : null}
             {this.state.page === 1 ? <Username incrementPage={this.incrementPage.bind(this)} username={this.state.username} updateUsername={this.updateUsername.bind(this)}/> : null}
             {this.state.page === 2 ? <Country countryCode={this.state.countrycode} countryName={this.state.countryname} updateCountry={this.updateCountry.bind(this)}/> : null}
-            {this.state.page === 3 ? <Atype aType={this.state.atype} updateAType={this.updateAType.bind(this)}/> : null}
-            {this.state.page === 4 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} incrementPage={this.incrementPage.bind(this)} addToCart={this.addToCart.bind(this)} removeFromCart={this.removeFromCart.bind(this)} cart={this.state.cart}/> : null}
-            {this.state.page === 5 ? <Summary username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
-            {this.state.page === 6 ? <Final username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
+            {this.state.page === 3 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} incrementPage={this.incrementPage.bind(this)} addToCart={this.addToCart.bind(this)} removeFromCart={this.removeFromCart.bind(this)} cart={this.state.cart}/> : null}
+            {this.state.page === 4 ? <Summary username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
+            {this.state.page === 5 ? <Final username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
           </div>
-          {this.state.page > 0 && !this.state.shopopen && (this.state.page < 4 || this.state.page === 5) ? <div id="next-step" onClick={this.incrementPage} className="step"><div>{this.state.page === 5 ? "FINALIZE" : "NEXT STEP"}</div></div> : null}
+          {this.state.page > 0 && !this.state.shopopen && (this.state.page < 3 || this.state.page === 4) ? <div id="next-step" onClick={this.incrementPage} className="step"><div>{this.state.page === 4 ? "FINALIZE" : "NEXT STEP"}</div></div> : null}
         </div>
         {this.state.isAnimating || this.state.isAnimating2 ? <Animation isAnimating={this.state.isAnimating} isAnimating2={this.state.isAnimating2} showContent={this.state.showContent}/> : null}
         {this.state.isImporting ? <Import importLink={(username, associatetype, countrycode, cart) => {this.importLink(username, associatetype, countrycode, cart)}} showImport={this.showImport} hideImport={this.hideImport}/> : null}
