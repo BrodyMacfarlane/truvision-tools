@@ -163,7 +163,7 @@ export default class Autoship extends Component {
                             {this.state.productsDictionary[cartItem.itemcode].productname}
                           </div>
                           <div className="cart-item-type">
-                            {cartItem.type === "kit" ? "Enroll" : "Autoship"}
+                            {cartItem.orderqty > 0 && "Cart"}{cartItem.orderqty > 0 && cartItem.autoshipqty > 0 ? ", " : ""}{cartItem.autoshipqty > 0 && "Subscribe"}
                           </div>
                         </div>
                       </div>

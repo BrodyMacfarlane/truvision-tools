@@ -120,32 +120,63 @@ class App extends Component {
   }
 
   addToCart(cartItem, type){
+
+    let typeDic = {"kit": "orderqty", "autoship": "autoshipqty"}
+    // console.log(cartItem, type)
     let refCartItem = {
-      "itemcode": cartItem.itemid,
-      "qty": 1,
-      "type": type
+        itemcode: cartItem.itemid,
+        orderqty: type === "kit" ? 1 : 0,
+        autoshipqty: type === "autoship" ? 1 : 0
     }
-    let itemMap = this.state.cart.map((x) => {
-      return x.itemcode
-    })
-    let typeMap = this.state.cart.map((x) => {
-      return x.type
-    })
-    let countTypesMapped = countTypes(typeMap)
-    if(numberOfEach(refCartItem.itemcode, itemMap) > 1 || this.state.cart.length >= 14 || (refCartItem.type === "kit" ? countTypesMapped[0] >= 7 : countTypesMapped[1] >= 7)){
-      // console.log("Individual item quantity limited to 1 and cart limited to 3 items of each type.")
-      // console.log(countTypesMapped)
-    }
-    else if(itemMap.indexOf(cartItem.itemid) > -1 && typeMap[itemMap.indexOf(cartItem.itemid)] === type){
-      console.log("Already have this item and type.")
-    }
-    else {
+
+    let cartIndex = this.state.cart.map(item => item.itemcode).indexOf(cartItem.itemid)
+
+    if (cartIndex === -1) {
       let cartArr = this.state.cart.concat(refCartItem)
       this.setState({cart: cartArr, menuOpen: false})
     }
+    
+    else if (this.state.cart[cartIndex][typeDic[type]] === 0) {
+      let newCart = this.state.cart
+      newCart[cartIndex][typeDic[type]] = 1
+      this.setState({cart: newCart, menuOpen: false})
+    }
+
+    else {
+      console.log("already have item/type")
+    }
+
+
+
+
+
+
+    // let refCartItem = {
+    //   "itemcode": cartItem.itemid,
+    //   "qty": 1,
+    //   "type": type
+    // }
+    // let itemMap = this.state.cart.map((x) => {
+    //   return x.itemcode
+    // })
+    // let typeMap = this.state.cart.map((x) => {
+    //   return x.type
+    // })
+    // let countTypesMapped = countTypes(typeMap)
+    // if(numberOfEach(refCartItem.itemcode, itemMap) > 1 || this.state.cart.length >= 14 || (refCartItem.type === "kit" ? countTypesMapped[0] >= 7 : countTypesMapped[1] >= 7)){
+    //   // console.log("Individual item quantity limited to 1 and cart limited to 3 items of each type.")
+    //   // console.log(countTypesMapped)
+    // }
+    // else if(itemMap.indexOf(cartItem.itemid) > -1 && typeMap[itemMap.indexOf(cartItem.itemid)] === type){
+    //   console.log("Already have this item and type.")
+    // }
+    // else {
+    //   let cartArr = this.state.cart.concat(refCartItem)
+    //   this.setState({cart: cartArr, menuOpen: false})
+  //   }
   }
 
-  removeFromCart(i){
+  removeFromCart(i) {
     let cartArr = this.state.cart
     cartArr.splice(i, 1)
     this.setState({cart: cartArr, menuOpen: false})

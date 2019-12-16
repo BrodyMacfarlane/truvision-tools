@@ -32,11 +32,11 @@ export default class Summary extends Component {
       let enrollarr = []
       let itemidstoget = []
       let productInfoPregame = {}
-      this.props.cart.map((item) => {
-        if(item.type === "autoship"){
+      this.props.cart.forEach((item) => {
+        if (item.autoshipqty > 0) {
           autoshiparr.push(item.itemcode)
         }
-        else {
+        if (item.orderqty > 0) {
           enrollarr.push(item.itemcode)
         }
       })
@@ -105,22 +105,6 @@ export default class Summary extends Component {
               <div className="summary-description">Cart</div>
               <div className="summary-change"><span id="not-bold">(<span className="change-summary" onClick={() => this.props.setPage(3, true)}>change</span>)</span></div>
             </div>
-            <div className="summary-info-title">Autoship</div>
-            <div className="summary-info">
-              {
-                this.state.autoship.length > 0
-                ?
-                this.state.autoship.map((item, i) => {
-                  if(this.state.productInfo[item]){
-                    return (
-                      <div key={i} className="summary-cart-product">SKU {this.state.productInfo[item][1]} <span id="green-hypen">-</span> {this.state.productInfo[item][0]}</div>
-                    )
-                  }
-                })
-                :
-                <div className="summary-cart-product">None</div>
-              }
-            </div>
             <div className="summary-info-title">Enrollment Order</div>
             <div className="summary-info">
               {
@@ -130,6 +114,22 @@ export default class Summary extends Component {
                   if(this.state.productInfo[item]){
                     return (
                       <div key={i} className="summary-cart-product">SKU {this.state.productInfo[item][1]} <span id="green-hyphen">-</span> {this.state.productInfo[item][0]}</div>
+                    )
+                  }
+                })
+                :
+                <div className="summary-cart-product">None</div>
+              }
+            </div>
+            <div className="summary-info-title">Subscription</div>
+            <div className="summary-info">
+              {
+                this.state.autoship.length > 0
+                ?
+                this.state.autoship.map((item, i) => {
+                  if(this.state.productInfo[item]){
+                    return (
+                      <div key={i} className="summary-cart-product">SKU {this.state.productInfo[item][1]} <span id="green-hypen">-</span> {this.state.productInfo[item][0]}</div>
                     )
                   }
                 })
