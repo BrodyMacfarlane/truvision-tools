@@ -29,7 +29,7 @@ export default class Final extends Component {
 
   shortenLink(){
     if(this.state.generatedCart !== this.props.cart){
-      axios.post('/api/getShortLink', {username: this.props.username, aType: this.props.aType, countryCode: this.props.countryCode, cart: this.props.cart})
+      axios.post('/api/getShortLink', {username: this.props.username, aType: this.props.aType, countryCode: this.props.countryCode, cart: this.props.cart, subCheck: this.props.subCheck})
         .then(response => {
           let resp = response.data
           this.setState({shortenedLink: resp.url, generatedCart: this.props.cart})

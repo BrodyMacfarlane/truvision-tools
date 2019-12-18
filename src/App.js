@@ -55,7 +55,9 @@ class App extends Component {
       cart: [],
       menuOpen: false,
       isImporting: false,
-      returnPage: 0
+      returnPage: 0,
+      preSubCart: [],
+      subCheck: false
     }
     this.incrementPage = this.incrementPage.bind(this)
     this.decrementPage = this.decrementPage.bind(this)
@@ -65,6 +67,35 @@ class App extends Component {
     this.showImport = this.showImport.bind(this)
     this.hideImport = this.hideImport.bind(this)
     this.importLink = this.importLink.bind(this)
+    this.toggleSubCheck = this.toggleSubCheck.bind(this)
+  }
+
+  toggleSubCheck () {
+    if (this.state.subCheck === false) {
+      this.setState({subCheck: !this.state.subCheck, preSubCart: this.state.cart.slice(0, this.state.cart.length)}, () => {
+        let subCart = []
+
+        this.state.cart.forEach(item => {
+          if (item.autoshipqty !== 1) {
+            let nitem = {
+              itemcode: item.itemcode,
+              orderqty: item.orderqty,
+              autoshipqty: 1
+            }
+            subCart.push(nitem)
+          }
+          else {
+            subCart.push(item)
+          }
+        })
+        this.setState({cart: subCart}, () => console.log(this.state.cart))
+      })
+    }
+
+    else {
+      // console.log(this.state.preSubCart)
+      this.setState({subCheck: !this.state.subCheck, cart: this.state.preSubCart})
+    }
   }
 
   returnHome(){
@@ -228,8 +259,8 @@ class App extends Component {
             {this.state.page === 1 ? <Username incrementPage={this.incrementPage.bind(this)} username={this.state.username} updateUsername={this.updateUsername.bind(this)}/> : null}
             {this.state.page === 2 ? <Country countryCode={this.state.countrycode} countryName={this.state.countryname} updateCountry={this.updateCountry.bind(this)}/> : null}
             {this.state.page === 3 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} incrementPage={this.incrementPage.bind(this)} addToCart={this.addToCart.bind(this)} removeFromCart={this.removeFromCart.bind(this)} cart={this.state.cart}/> : null}
-            {this.state.page === 4 ? <Summary username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
-            {this.state.page === 5 ? <Final username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
+            {this.state.page === 4 ? <Summary toggleSubCheck={this.toggleSubCheck} subCheck={this.state.subCheck} username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
+            {this.state.page === 5 ? <Final subCheck={this.state.subCheck} username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
           </div>
           {this.state.page > 0 && !this.state.shopopen && (this.state.page < 3 || this.state.page === 4) ? <div id="next-step" onClick={this.incrementPage} className="step"><div>{this.state.page === 4 ? "FINALIZE" : "NEXT STEP"}</div></div> : null}
         </div>

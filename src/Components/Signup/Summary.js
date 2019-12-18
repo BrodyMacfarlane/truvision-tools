@@ -25,8 +25,6 @@ export default class Summary extends Component {
   }
 
   refreshCart(){
-    console.log(this.props.countryCode)
-    console.log(this.props.aType)
     if(this.props.cart.length > 0){
       let autoshiparr = []
       let enrollarr = []
@@ -51,11 +49,7 @@ export default class Summary extends Component {
                   productInfoPregame[item.itemid] = [item.productname, item.sku, item.image]
                 }
               })
-              this.setState({productInfo: productInfoPregame}, () => {
-                console.log(this.state.productInfo)
-                console.log(this.state.autoship)
-                console.log(this.state.enroll)
-              })
+              this.setState({productInfo: productInfoPregame})
             })
         })
       })
@@ -86,6 +80,16 @@ export default class Summary extends Component {
           </div>
         </div>
         <div className="summary-container">
+          <div className="subscribe-summary-container summary-container">
+            <div className="subscribe-wrapper">
+              <div className="sub-checkbox">
+                <label className="label-container">Want to save more today by subscribing to these items?
+                  <input type="checkbox" onChange={() => this.props.toggleSubCheck()} checked={this.props.subCheck} />
+                  <span className="checkmark"></span>
+                </label>
+              </div>
+            </div>
+          </div>
           <div className="username-summary-container summary-container">
             <div className="summary-wrapper">
               <div className="summary-description">Username</div>
@@ -108,13 +112,17 @@ export default class Summary extends Component {
             <div className="summary-info-title">Enrollment Order</div>
             <div className="summary-info">
               {
-                this.state.enroll.length > 0
+                this.props.cart.reduce((a, b) => {
+                  return {orderqty: a.orderqty + b.orderqty}
+                }).orderqty > 0
                 ?
-                this.state.enroll.map((item, i) => {
-                  if(this.state.productInfo[item]){
-                    return (
-                      <div key={i} className="summary-cart-product">SKU {this.state.productInfo[item][1]} <span id="green-hyphen">-</span> {this.state.productInfo[item][0]}</div>
-                    )
+                this.props.cart.map((item, i) => {
+                  if (item.orderqty > 0) {
+                    if(this.state.productInfo[item.itemcode]){
+                      return (
+                        <div key={i} className="summary-cart-product">SKU {this.state.productInfo[item.itemcode][1]} <span id="green-hyphen">-</span> {this.state.productInfo[item.itemcode][0]}</div>
+                      )
+                    }
                   }
                 })
                 :
@@ -124,13 +132,17 @@ export default class Summary extends Component {
             <div className="summary-info-title">Subscription</div>
             <div className="summary-info">
               {
-                this.state.autoship.length > 0
+                this.props.cart.reduce((a, b) => {
+                  return {autoshipqty: a.autoshipqty + b.autoshipqty}
+                }).autoshipqty > 0
                 ?
-                this.state.autoship.map((item, i) => {
-                  if(this.state.productInfo[item]){
-                    return (
-                      <div key={i} className="summary-cart-product">SKU {this.state.productInfo[item][1]} <span id="green-hypen">-</span> {this.state.productInfo[item][0]}</div>
-                    )
+                this.props.cart.map((item, i) => {
+                  if (item.autoshipqty > 0) {
+                    if(this.state.productInfo[item.itemcode]){
+                      return (
+                        <div key={i} className="summary-cart-product">SKU {this.state.productInfo[item.itemcode][1]} <span id="green-hypen">-</span> {this.state.productInfo[item.itemcode][0]}</div>
+                      )
+                    }
                   }
                 })
                 :
