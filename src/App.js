@@ -225,12 +225,13 @@ class App extends Component {
     this.setState({isImporting: false, page: this.state.returnPage})
   }
 
-  importLink(username, associatetype, countrycode, cart){
+  importLink(username, associatetype, countrycode, cart, sub){
     this.setState({
       username: username,
       atype: associatetype,
       countrycode: countrycode,
-      cart: cart
+      cart: cart,
+      subCheck: sub
     }, () => {
       this.setPage(4, false)
     })
@@ -265,7 +266,7 @@ class App extends Component {
           {this.state.page > 0 && !this.state.shopopen && (this.state.page < 3 || this.state.page === 4) ? <div id="next-step" onClick={this.incrementPage} className="step"><div>{this.state.page === 4 ? "FINALIZE" : "NEXT STEP"}</div></div> : null}
         </div>
         {this.state.isAnimating || this.state.isAnimating2 ? <Animation isAnimating={this.state.isAnimating} isAnimating2={this.state.isAnimating2} showContent={this.state.showContent}/> : null}
-        {this.state.isImporting ? <Import importLink={(username, associatetype, countrycode, cart) => {this.importLink(username, associatetype, countrycode, cart)}} showImport={this.showImport} hideImport={this.hideImport}/> : null}
+        {this.state.isImporting ? <Import importLink={(username, associatetype, countrycode, cart, sub) => {this.importLink(username, associatetype, countrycode, cart, sub)}} showImport={this.showImport} hideImport={this.hideImport}/> : null}
       </div>
     );
   }

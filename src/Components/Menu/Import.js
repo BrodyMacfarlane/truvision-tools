@@ -51,8 +51,9 @@ export default class Import extends Component {
           let username = (longLink.split("https://shop.truvisionhealth.com/")[1].split("/")[0]).toString()
           let associatetype = parseInt(longLink.split("type=")[1].split("&countrycode=")[0])
           let countrycode = (longLink.split("&countrycode=")[1].split("&language=")[0]).toString()
-          let cart = JSON.parse(longLink.split("&products=")[1].split("&isDiscount")[0])
-          this.props.importLink(username, associatetype, countrycode, cart)
+          let cart = JSON.parse(longLink.split("&products=")[1].split("&isDiscount=")[0])
+          let sub = longLink.split("&isDiscount=")[1].slice(0, 4) === true
+          this.props.importLink(username, associatetype, countrycode, cart, sub)
         }
       })
   }
