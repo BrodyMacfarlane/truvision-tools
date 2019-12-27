@@ -238,6 +238,7 @@ class App extends Component {
     console.log(`username: ${username}`)
     console.log(`associate type: ${associatetype}`)
     console.log(`country code: ${countrycode}`)
+    console.log(`subCheck: ${sub}`)
     console.log(cart)
   }
 
