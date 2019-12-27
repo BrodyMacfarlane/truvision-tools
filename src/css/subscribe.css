@@ -1,0 +1,10 @@
+.subscribe-summary-container.summary-container {
+  display: flex;
+  justify-content: center;
+}
+
+.subscribe-wrapper {
+  padding: 30px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}

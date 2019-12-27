@@ -63,7 +63,7 @@ export default class Import extends Component {
       <div className="import-component-container">
         <div className="title-container content-container">
           <div className="sub-title import-title">
-            Import Link
+            Test TruVis.io Link
           </div>
         </div>
         <div className="import-description-container content-container">

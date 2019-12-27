@@ -18,7 +18,7 @@ export default class Menu extends Component {
         <div className="menu-triangle menu-triangle-two"></div>
         <div className="menu-component">
           <div onClick={this.props.returnHome} className="menu-component-item">Start Over</div>
-          <div onClick={this.props.showImport} className="menu-component-item">Read/Import Existing URL</div>
+          <div onClick={this.props.showImport} className="menu-component-item">Test TruVis.io Link</div>
         </div>
       </div>
     )

@@ -80,16 +80,6 @@ export default class Summary extends Component {
           </div>
         </div>
         <div className="summary-container">
-          <div className="subscribe-summary-container summary-container">
-            <div className="subscribe-wrapper">
-              <div className="sub-checkbox">
-                <label className="label-container">Want to save more today by subscribing to these items?
-                  <input type="checkbox" onChange={() => this.props.toggleSubCheck()} checked={this.props.subCheck} />
-                  <span className="checkmark"></span>
-                </label>
-              </div>
-            </div>
-          </div>
           <div className="username-summary-container summary-container">
             <div className="summary-wrapper">
               <div className="summary-description">Username</div>

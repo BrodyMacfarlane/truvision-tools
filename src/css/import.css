@@ -109,3 +109,15 @@
     padding: 30px;
   }
 }
+
+@media only screen and (max-width: 950px) {
+  .sub-title.import-title {
+    font-size: 56px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sub-title.import-title {
+    font-size: 36px;
+  }
+}
