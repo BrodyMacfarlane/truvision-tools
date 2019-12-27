@@ -231,7 +231,7 @@ class App extends Component {
       cart: cart,
       subCheck: sub
     }, () => {
-      this.setPage(4, false)
+      this.setPage(5, false)
     })
     console.log(`username: ${username}`)
     console.log(`associate type: ${associatetype}`)
@@ -258,8 +258,8 @@ class App extends Component {
             {this.state.page === 1 ? <Username incrementPage={this.incrementPage.bind(this)} username={this.state.username} updateUsername={this.updateUsername.bind(this)}/> : null}
             {this.state.page === 2 ? <Country countryCode={this.state.countrycode} countryName={this.state.countryname} updateCountry={this.updateCountry.bind(this)}/> : null}
             {this.state.page === 3 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} incrementPage={this.incrementPage.bind(this)} addToCart={this.addToCart.bind(this)} removeFromCart={this.removeFromCart.bind(this)} cart={this.state.cart}/> : null}
-            {this.state.page === 4 ? <Summary username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
-            {this.state.page === 5 ? <Subscribe cart={this.state.cart} toggleSubCheck={this.toggleSubCheck} subCheck={this.state.subCheck} /> : null}
+            {this.state.page === 4 ? <Subscribe cart={this.state.cart} toggleSubCheck={this.toggleSubCheck} subCheck={this.state.subCheck} /> : null}
+            {this.state.page === 5 ? <Summary username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
             {this.state.page === 6 ? <Final subCheck={this.state.subCheck} username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
           </div>
           {this.state.page > 0 && !this.state.shopopen && (this.state.page < 3 || (this.state.page >= 4 && this.state.page < 6)) ? <div id="next-step" onClick={this.incrementPage} className="step"><div>{this.state.page === 5 ? "FINALIZE" : "NEXT STEP"}</div></div> : null}
