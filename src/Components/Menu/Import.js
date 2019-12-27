@@ -86,7 +86,7 @@ export default class Import extends Component {
         }
         {
           this.state.invalidLink ?
-            <div className="import-description-container content-container invalid-link-import">Invalid link input, please double check and try again.  If the problem persists, please email Web@truvisionhealth.com.</div>
+            <div className="import-description-container content-container invalid-link-import">Invalid link input, please double check and try again.  This is most likely due to being a link older than December 2019, but if you suspect an issue, please email Web@truvisionhealth.com.</div>
           : null
         }
         {
