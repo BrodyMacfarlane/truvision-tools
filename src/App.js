@@ -97,7 +97,7 @@ class App extends Component {
   }
 
   returnHome(){
-    this.setState({page: 0, shopopen: false, isImporting: false})
+    this.setState({page: 0, shopopen: false, isImporting: false, cart: []})
   }
 
   setPage(page, shopopen){
