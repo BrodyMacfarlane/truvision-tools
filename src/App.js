@@ -7,7 +7,6 @@ import Shop from './Components/Signup/Shop';
 import Summary from './Components/Signup/Summary';
 import Final from './Components/Signup/Final';
 import Import from './Components/Menu/Import';
-import Subscribe from './Components/Signup/Subscribe';
 import logo from "./assets/logo.svg";
 import './css/main.css';
 
@@ -53,9 +52,7 @@ class App extends Component {
       shopopen: false,
       cart: [],
       isImporting: false,
-      returnPage: 0,
-      preSubCart: [],
-      subCheck: false
+      returnPage: 0
     }
     this.incrementPage = this.incrementPage.bind(this)
     this.decrementPage = this.decrementPage.bind(this)
@@ -65,39 +62,10 @@ class App extends Component {
     this.showImport = this.showImport.bind(this)
     this.hideImport = this.hideImport.bind(this)
     this.importLink = this.importLink.bind(this)
-    this.toggleSubCheck = this.toggleSubCheck.bind(this)
-  }
-
-  toggleSubCheck () {
-    if (this.state.subCheck === false) {
-      this.setState({subCheck: !this.state.subCheck, preSubCart: this.state.cart.slice(0, this.state.cart.length)}, () => {
-        let subCart = []
-
-        this.state.cart.forEach(item => {
-          if (item.autoshipqty !== 1) {
-            let nitem = {
-              itemcode: item.itemcode,
-              orderqty: item.orderqty,
-              autoshipqty: 1
-            }
-            subCart.push(nitem)
-          }
-          else {
-            subCart.push(item)
-          }
-        })
-        this.setState({cart: subCart}, () => console.log(this.state.cart))
-      })
-    }
-
-    else {
-      // console.log(this.state.preSubCart)
-      this.setState({subCheck: !this.state.subCheck, cart: this.state.preSubCart})
-    }
   }
 
   returnHome(){
-    this.setState({page: 0, shopopen: false, isImporting: false, cart: [], returnPage: 0, preSubCart: [], subCheck: false})
+    this.setState({page: 0, shopopen: false, isImporting: false, cart: [], returnPage: 0})
   }
 
   setPage(page, shopopen){
@@ -223,20 +191,18 @@ class App extends Component {
     this.setState({isImporting: false, page: this.state.returnPage})
   }
 
-  importLink(username, associatetype, countrycode, cart, sub){
+  importLink(username, associatetype, countrycode, cart){
     this.setState({
       username: username,
       atype: associatetype,
       countrycode: countrycode,
-      cart: cart,
-      subCheck: sub
+      cart: cart
     }, () => {
-      this.setPage(5, false)
+      this.setPage(4, false)
     })
     console.log(`username: ${username}`)
     console.log(`associate type: ${associatetype}`)
     console.log(`country code: ${countrycode}`)
-    console.log(`subCheck: ${sub}`)
     console.log(cart)
   }
 
@@ -258,14 +224,13 @@ class App extends Component {
             {this.state.page === 1 ? <Username incrementPage={this.incrementPage.bind(this)} username={this.state.username} updateUsername={this.updateUsername.bind(this)}/> : null}
             {this.state.page === 2 ? <Country countryCode={this.state.countrycode} countryName={this.state.countryname} updateCountry={this.updateCountry.bind(this)}/> : null}
             {this.state.page === 3 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} incrementPage={this.incrementPage.bind(this)} addToCart={this.addToCart.bind(this)} removeFromCart={this.removeFromCart.bind(this)} cart={this.state.cart}/> : null}
-            {this.state.page === 4 ? <Subscribe cart={this.state.cart} toggleSubCheck={this.toggleSubCheck} subCheck={this.state.subCheck} /> : null}
-            {this.state.page === 5 ? <Summary username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
-            {this.state.page === 6 ? <Final subCheck={this.state.subCheck} username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
+            {this.state.page === 4 ? <Summary username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
+            {this.state.page === 5 ? <Final username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
           </div>
-          {this.state.page > 0 && !this.state.shopopen && (this.state.page < 3 || (this.state.page >= 4 && this.state.page < 6)) ? <div id="next-step" onClick={this.incrementPage} className="step"><div>{this.state.page === 5 ? "FINALIZE" : "NEXT STEP"}</div></div> : null}
+          {this.state.page > 0 && !this.state.shopopen && (this.state.page !== 3 && this.state.page < 5) ? <div id="next-step" onClick={this.incrementPage} className="step"><div>{this.state.page === 4 ? "FINALIZE" : "NEXT STEP"}</div></div> : null}
         </div>
         {this.state.isAnimating || this.state.isAnimating2 ? <Animation isAnimating={this.state.isAnimating} isAnimating2={this.state.isAnimating2} showContent={this.state.showContent}/> : null}
-        {this.state.isImporting ? <Import importLink={(username, associatetype, countrycode, cart, sub) => {this.importLink(username, associatetype, countrycode, cart, sub)}} showImport={this.showImport} hideImport={this.hideImport}/> : null}
+        {this.state.isImporting ? <Import importLink={(username, associatetype, countrycode, cart) => {this.importLink(username, associatetype, countrycode, cart)}} showImport={this.showImport} hideImport={this.hideImport}/> : null}
       </div>
     );
   }
