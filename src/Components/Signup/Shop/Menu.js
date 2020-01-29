@@ -134,6 +134,9 @@ export default class Autoship extends Component {
                   {product.stores.indexOf(4) > -1 ? <div className="add-product-type" onClick={() => {this.props.addToCart(product, "kit")}}>Cart</div> : null}
                   {product.stores.indexOf(5) > -1 ? <div className="add-product-type" onClick={() => {this.props.addToCart(product, "autoship")}}>Subscribe</div> : null}
                 </div>
+                {
+                  product.stores.indexOf(4) > -1 && product.stores.indexOf(5) > -1 ? <div className="choose-store"><div className="add-product-type full-width" onClick={() => {this.props.addToCart(product, "both")}}>Add to Cart and Subscribe</div></div> : null
+                }
               </div>
             )
           })}

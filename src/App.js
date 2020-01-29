@@ -124,8 +124,8 @@ class App extends Component {
 
     let refCartItem = {
         itemcode: cartItem.itemid,
-        orderqty: type === "kit" ? 1 : 0,
-        autoshipqty: type === "autoship" ? 1 : 0
+        orderqty: type === "kit" || type === "both" ? 1 : 0,
+        autoshipqty: type === "autoship" || type === "both" ? 1 : 0
     }
 
     let cartIndex = this.state.cart.map(item => item.itemcode).indexOf(cartItem.itemid)
@@ -133,6 +133,13 @@ class App extends Component {
     if (cartIndex === -1) {
       let cartArr = this.state.cart.concat(refCartItem)
       this.setState({cart: cartArr})
+    }
+
+    else if (type === "both") {
+      let newCart = this.state.cart
+      newCart[cartIndex]["orderqty"] = 1
+      newCart[cartIndex]["autoshipqty"] = 1
+      this.setState({cart: newCart})
     }
     
     else if (this.state.cart[cartIndex][typeDic[type]] === 0) {
