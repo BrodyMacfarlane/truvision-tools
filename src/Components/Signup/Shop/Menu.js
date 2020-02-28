@@ -23,7 +23,8 @@ const regionids = {
   "CO": 32,
   "PH": 34,
   "HN": 35,
-  "NA": 36
+  "NA": 36,
+  "PE": 37
 }
 
 export default class Autoship extends Component {
