@@ -28,6 +28,17 @@ const languageRestrictions = {
   ]
 }
 
+const languageDefaults = {
+  "PA": "es",
+  "CR": "es",
+  "SV": "es",
+  "GT": "es",
+  "HN": "es",
+  "MX": "es",
+  "PE": "es",
+  "CO": "es"
+}
+
 
 class App extends Component {
   constructor(){
@@ -114,23 +125,25 @@ class App extends Component {
   }
 
   updateCountry(countrycode, countryname){
-    if (languageRestrictions[this.state.languagePref]) {
+    if (languageDefaults[countrycode]) {
+      this.setState({languagePref: languageDefaults[countrycode], countrycode: countrycode, countryname: countryname, menuOpen: false, cart: []}, () => {
+        this.incrementPage()
+      })
+    }
+    else if (languageRestrictions[this.state.languagePref]) {
       if (languageRestrictions[this.state.languagePref].indexOf(countrycode) > -1) {
         this.setState({countrycode: countrycode, countryname: countryname, menuOpen: false, cart: []}, () => {
-          console.log(this.state.languagePref, 1)
           this.incrementPage()
         })
       }
       else {
         this.setState({languagePref: 'en', countrycode: countrycode, countryname: countryname, menuOpen: false, cart: []}, () => {
-          console.log(this.state.languagePref, 2)
           this.incrementPage()
         })
       }
     }
     else {
       this.setState({countrycode: countrycode, countryname: countryname, menuOpen: false, cart: []}, () => {
-        console.log(this.state.languagePref, 3)
         this.incrementPage()
       })
     }
