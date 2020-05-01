@@ -10,7 +10,6 @@ import Import from './Components/Menu/Import';
 import logo from "./assets/logo.svg";
 import './css/main.css';
 
-
 const languageRestrictions = {
   es: [
     "US",
@@ -225,19 +224,16 @@ class App extends Component {
     this.setState({isImporting: false, page: this.state.returnPage})
   }
 
-  importLink(username, associatetype, countrycode, cart){
+  importLink(username, associatetype, countrycode, cart, language){
     this.setState({
       username: username,
       atype: associatetype,
       countrycode: countrycode,
-      cart: cart
+      cart: cart,
+      languagePref: language
     }, () => {
       this.setPage(4, false)
     })
-    console.log(`username: ${username}`)
-    console.log(`associate type: ${associatetype}`)
-    console.log(`country code: ${countrycode}`)
-    console.log(cart)
   }
 
   render() {
@@ -264,7 +260,7 @@ class App extends Component {
           {this.state.page > 0 && !this.state.shopopen && (this.state.page !== 3 && this.state.page < 5) ? <div id="next-step" onClick={this.incrementPage} className="step"><div>{this.state.page === 4 ? "FINALIZE" : "NEXT STEP"}</div></div> : null}
         </div>
         {this.state.isAnimating || this.state.isAnimating2 ? <Animation isAnimating={this.state.isAnimating} isAnimating2={this.state.isAnimating2} showContent={this.state.showContent}/> : null}
-        {this.state.isImporting ? <Import importLink={(username, associatetype, countrycode, cart) => {this.importLink(username, associatetype, countrycode, cart)}} showImport={this.showImport} hideImport={this.hideImport}/> : null}
+        {this.state.isImporting ? <Import importLink={(username, associatetype, countrycode, cart, language) => {this.importLink(username, associatetype, countrycode, cart, language)}} showImport={this.showImport} hideImport={this.hideImport}/> : null}
       </div>
     );
   }

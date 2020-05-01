@@ -52,7 +52,8 @@ export default class Import extends Component {
           let associatetype = parseInt(longLink.split("type=")[1].split("&countrycode=")[0])
           let countrycode = (longLink.split("&countrycode=")[1].split("&language=")[0]).toString()
           let cart = JSON.parse(longLink.split("&products=")[1])
-          this.props.importLink(username, associatetype, countrycode, cart)
+          let language = longLink.split("&language=")[1].split("-")[0]
+          this.props.importLink(username, associatetype, countrycode, cart, language)
         }
       })
   }
