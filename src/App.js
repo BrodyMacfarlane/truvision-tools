@@ -10,31 +10,25 @@ import Import from './Components/Menu/Import';
 import logo from "./assets/logo.svg";
 import './css/main.css';
 
-const atypes = ["Associate", "Retail Customer", "Preferred Customer"]
 
-function countTypes(typearr){
-  let kitcount = 0
-  let autoshipcount = 0
-  for(let i = 0; i < typearr.length; i++){
-    if(typearr[i] === "autoship") {
-      autoshipcount++
-    }
-    else {
-      kitcount++
-    }
-  }
-  return [kitcount, autoshipcount]
+const languageRestrictions = {
+  es: [
+    "US",
+    "BM",
+    "CA",
+    "CO",
+    "CR",
+    "SV",
+    "GR",
+    "GT",
+    "HN",
+    "IE",
+    "MX",
+    "PA",
+    "PE"
+  ]
 }
 
-function numberOfEach(ic, itemcodes){
-  let count = 0
-  for(let i = 0; i < itemcodes.length; i++){
-    if(itemcodes[i] === ic) {
-      count++
-    }
-  }
-  return count
-}
 
 class App extends Component {
   constructor(){
@@ -52,7 +46,8 @@ class App extends Component {
       shopopen: false,
       cart: [],
       isImporting: false,
-      returnPage: 0
+      returnPage: 0,
+      languagePref: navigator.language ? navigator.language.split(/[-_]/)[0] : 'en'
     }
     this.incrementPage = this.incrementPage.bind(this)
     this.decrementPage = this.decrementPage.bind(this)
@@ -62,6 +57,21 @@ class App extends Component {
     this.showImport = this.showImport.bind(this)
     this.hideImport = this.hideImport.bind(this)
     this.importLink = this.importLink.bind(this)
+    this.setLanguage = this.setLanguage.bind(this)
+  }
+
+  setLanguage(lang) {
+    if (languageRestrictions[lang]) {
+      if (languageRestrictions[lang].indexOf(this.state.countrycode) > -1) {
+        this.setState({languagePref: lang})
+      }
+      else {
+        this.setState({languagePref: 'en'})
+      }
+    }
+    else {
+      this.setState({languagePref: 'en'})
+    }
   }
 
   returnHome(){
@@ -105,9 +115,26 @@ class App extends Component {
   }
 
   updateCountry(countrycode, countryname){
-    this.setState({countrycode: countrycode, countryname: countryname, menuOpen: false, cart: []}, () => {
-      this.incrementPage()
-    })
+    if (languageRestrictions[this.state.languagePref]) {
+      if (languageRestrictions[this.state.languagePref].indexOf(countrycode) > -1) {
+        this.setState({countrycode: countrycode, countryname: countryname, menuOpen: false, cart: []}, () => {
+          console.log(this.state.languagePref, 1)
+          this.incrementPage()
+        })
+      }
+      else {
+        this.setState({languagePref: 'en', countrycode: countrycode, countryname: countryname, menuOpen: false, cart: []}, () => {
+          console.log(this.state.languagePref, 2)
+          this.incrementPage()
+        })
+      }
+    }
+    else {
+      this.setState({countrycode: countrycode, countryname: countryname, menuOpen: false, cart: []}, () => {
+        console.log(this.state.languagePref, 3)
+        this.incrementPage()
+      })
+    }
   }
 
   updateAType(type){
@@ -229,10 +256,10 @@ class App extends Component {
           <div className="signup-container">
             {this.state.page <= 0 ? <Welcome incrementPage={this.incrementPage.bind(this)}/> : null}
             {this.state.page === 1 ? <Username incrementPage={this.incrementPage.bind(this)} username={this.state.username} updateUsername={this.updateUsername.bind(this)}/> : null}
-            {this.state.page === 2 ? <Country countryCode={this.state.countrycode} countryName={this.state.countryname} updateCountry={this.updateCountry.bind(this)}/> : null}
+            {this.state.page === 2 ? <Country languagePref={this.state.languagePref} setLanguage={(lang) => this.setLanguage(lang)} countryCode={this.state.countrycode} countryName={this.state.countryname} updateCountry={this.updateCountry.bind(this)}/> : null}
             {this.state.page === 3 ? <Shop username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} shopopen={this.state.shopopen} openShop={this.openShop.bind(this)} closeShop={this.closeShop.bind(this)} incrementPage={this.incrementPage.bind(this)} addToCart={this.addToCart.bind(this)} removeFromCart={this.removeFromCart.bind(this)} cart={this.state.cart}/> : null}
-            {this.state.page === 4 ? <Summary username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
-            {this.state.page === 5 ? <Final username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
+            {this.state.page === 4 ? <Summary languagePref={this.state.languagePref} username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart} updateUsername={this.updateUsername.bind(this)} setPage={(page, shopopen) => this.setPage(page, shopopen)}/> : null}
+            {this.state.page === 5 ? <Final languagePref={this.state.languagePref} username={this.state.username} countryCode={this.state.countrycode} aType={this.state.atype} cart={this.state.cart}/> : null}
           </div>
           {this.state.page > 0 && !this.state.shopopen && (this.state.page !== 3 && this.state.page < 5) ? <div id="next-step" onClick={this.incrementPage} className="step"><div>{this.state.page === 4 ? "FINALIZE" : "NEXT STEP"}</div></div> : null}
         </div>

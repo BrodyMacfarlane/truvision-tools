@@ -3,7 +3,7 @@ import Loading from '../Loading/Loading';
 import FlagIcon from 'react-flag-kit/lib/FlagIcon';
 import axios from 'axios';
 import '../../css/country.css';
-import logo from '../../assets/logo.svg'
+import LanguageSelector from '../LanguageSelector/LanguageSelector'
 
 export default class Country extends Component {
   constructor(props){
@@ -27,13 +27,19 @@ export default class Country extends Component {
       <div className="input-component-container component-container">
         <div className="title-container content-container">
           <div className="sub-title">
-            Country
+            Language/Country
           </div>
         </div>
         <div className="countries-description-container content-container">
           <div className="description">
-            Please select the country your new enrollment currently resides in.
+            Please select your new enrollment's preferred language and the country of which they currently reside in.
           </div>
+        </div>
+        <div className="language-selector-container">
+          <LanguageSelector
+            selectedLanguage={this.props.languagePref}
+            setSelectedLanguage={this.props.setLanguage}
+          />
         </div>
         <div className="countries-container content-container">
           <div>

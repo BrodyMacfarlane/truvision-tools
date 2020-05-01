@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../../css/summary.css';
 
-const associateTypes = ["Associate", "Retail Customer", "Preferred Customer"]
+const languages = {
+  en: "English",
+  es: "Español"
+}
 
 export default class Summary extends Component {
   constructor(props){
@@ -89,9 +92,10 @@ export default class Summary extends Component {
           </div>
           <div className="country-summary-container summary-container">
             <div className="summary-wrapper">
-              <div className="summary-description">Country</div>
+              <div className="summary-description">Language & Country</div>
               <div className="summary-change"><span id="not-bold">(<span className="change-summary" onClick={() => this.props.setPage(2, false)}>change</span>)</span></div>
             </div>
+            <div className="summary-info">{languages[this.props.languagePref] ? languages[this.props.languagePref] : "Invalid language.  Please go back and select an option."}</div>
             <div className="summary-info">{this.props.countryCode}</div>
           </div>
           <div className="cart-summary-container summary-container">
@@ -102,7 +106,7 @@ export default class Summary extends Component {
             <div className="summary-info-title">Enrollment Order</div>
             <div className="summary-info">
               {
-                this.props.cart.reduce((a, b) => {
+                this.props.cart.length && this.props.cart.reduce((a, b) => {
                   return {orderqty: a.orderqty + b.orderqty}
                 }).orderqty > 0
                 ?
@@ -122,7 +126,7 @@ export default class Summary extends Component {
             <div className="summary-info-title">Subscription</div>
             <div className="summary-info">
               {
-                this.props.cart.reduce((a, b) => {
+                this.props.cart.length && this.props.cart.reduce((a, b) => {
                   return {autoshipqty: a.autoshipqty + b.autoshipqty}
                 }).autoshipqty > 0
                 ?
