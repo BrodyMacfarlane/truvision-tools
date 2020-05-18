@@ -43,11 +43,11 @@ export default class Import extends Component {
     let reformLink = splitLink[splitLink.length - 1].length > 0 ? splitLink[splitLink.length - 1] : splitLink[splitLink.length - 2]
     axios.post("https://truvis.io/api/importLink", {shorturl: reformLink})
       .then(response => {
-        if(!response.data || response.data.length === 0 || !response.data.split("https://shop.truvisionhealth.com/")[1]){
+        if(!response.data.url || response.data.url.length === 0 || !response.data.url.split("https://shop.truvisionhealth.com/")[1]){
           this.setState({invalidLink: true})
         }
         else {
-          let longLink = response.data
+          let longLink = response.data.url
           let username = (longLink.split("https://shop.truvisionhealth.com/")[1].split("/")[0]).toString()
           let associatetype = parseInt(longLink.split("type=")[1].split("&countrycode=")[0])
           let countrycode = (longLink.split("&countrycode=")[1].split("&language=")[0]).toString()
